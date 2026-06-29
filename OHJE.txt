@@ -1,5 +1,13 @@
-Matkalla Suomessa v30 Premium
+Matkalla Suomessa v31 Premium-harppaus
 
-Päivitä GitHubiin kaikki tämän kansion tiedostot.
-Jos GitHubissa on vanhoja tiedostoja, korvaa ne näillä.
-Netlify julkaisee automaattisesti commitin jälkeen.
+Päivitä GitHubiin kaikki tämän kansion tiedostot:
+- index.html
+- kartta.html
+- paijat-hame.html
+- paivakirja.html
+- profiili.html
+- app.js
+- data.js
+- styles.css
+
+Tämän jälkeen paina GitHubissa Commit changes ja odota Netlifyn julkaisu.
