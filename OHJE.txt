@@ -1,4 +1,12 @@
-Matkalla Suomessa v14 – Suomen kartta 2.0
+Matkalla Suomessa v17 – Karavaanarin kumppani
 
-Päivitys: karttanäkymä on korvattu Suomen muotoisella SVG-kartalla, jossa maakuntapisteet ovat oikeilla suurpiirteisillä alueilla.
-Lataa kaikki tiedostot GitHubiin ja tee Commit changes. Netlify julkaisee automaattisesti.
+Sisältää:
+- Premium-kartta
+- Kunnan oma sivu laajennettuna
+- Käyntipäivä, arvosana, suosikki, yövyin täällä
+- Kuvat-laskuri
+- Omat vinkit: matkaparkit, leirintäalueet, kahvilat/ravintolat, nähtävyydet
+- Karavaanarin lokikirja ilman kilometrejä
+- Varmuuskopio-näkymä
+
+Pura ZIP, vie kaikki tiedostot GitHubiin ja paina Commit changes.
