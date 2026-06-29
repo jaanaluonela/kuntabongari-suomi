@@ -1,5 +1,24 @@
-Matkalla Suomessa v30 Premium
+V32 PUHDAS PERUSTA
 
-Päivitä GitHubiin kaikki tämän kansion tiedostot.
-Jos GitHubissa on vanhoja tiedostoja, korvaa ne näillä.
-Netlify julkaisee automaattisesti commitin jälkeen.
+GitHubiin jätetään vain:
+index.html
+kartta.html
+paijat-hame.html
+paivakirja.html
+profiili.html
+data.js
+sovellus.js
+tyylit.css
+README.md / README.txt / OHJE.txt saa jäädä.
+
+Poista tai älä käytä:
+app.js
+styles.css
+script.js
+tyyli.css
+tyylit.css.css
+
+Kaikki HTML-sivut käyttävät:
+tyylit.css
+data.js
+sovellus.js
