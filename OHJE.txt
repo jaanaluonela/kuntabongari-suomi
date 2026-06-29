@@ -1,8 +1,4 @@
-Matkalla Suomessa v15 Premium-kartta
+Matkalla Suomessa v14 – Suomen kartta 2.0
 
-1. Pura ZIP.
-2. Avaa purettu kansio.
-3. GitHubissa: Add file -> Upload files.
-4. Valitse kaikki tämän kansion tiedostot.
-5. Commit changes.
-6. Netlify julkaisee automaattisesti.
+Päivitys: karttanäkymä on korvattu Suomen muotoisella SVG-kartalla, jossa maakuntapisteet ovat oikeilla suurpiirteisillä alueilla.
+Lataa kaikki tiedostot GitHubiin ja tee Commit changes. Netlify julkaisee automaattisesti.
