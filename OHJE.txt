@@ -1,0 +1,11 @@
+Matkalla Suomessa v9
+
+Kopioi kaikki tämän kansion tiedostot matkalla-suomessa-kansioon ja valitse Korvaa kaikki.
+Päivitä selain Ctrl + F5.
+
+Uutta v9-versiossa:
+- etusivua viimeistelty
+- suuremmat ja selkeämmät painikkeet
+- Matkavinkit-osio siistitty
+- luotettavan tiedon muistutus
+- moderni mutta helppokäyttöinen ulkoasu

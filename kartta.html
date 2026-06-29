@@ -1,46 +1,27 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kartta - Suomen Matkakirja</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matkalla Suomessa</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header>🇫🇮 Suomen Matkakirja</header>
-<nav>
-  <a href="index.html">Etusivu</a>
-  <a class="active" href="kartta.html">Kartta</a>
-  <a href="paivakirja.html">Päiväkirja</a>
-  <a href="profiili.html">Profiili</a>
-</nav>
-
-<div class="container">
-  <section class="cards">
-    <div class="card"><div class="icon">📍</div><b data-stat="visited">0 / 308</b><br>Käytyä kuntaa</div>
-    <div class="card"><div class="icon">🧭</div><b data-stat="regions">0 / 19</b><br>Maakuntaa</div>
-    <div class="card"><div class="icon">📖</div><b data-stat="diary">0</b><br>Muistiota</div>
-    <a class="card" href="index.html"><div class="icon">🏠</div>Etusivu</a>
-  </section>
-
-  <section class="grid">
-    <div class="map-wrap">
-      <h1>Suomen kartta</h1>
-      <p>Testiversiossa mukana on osa kunnista. Klikkaa kuntaa ja merkitse käydyksi.</p>
-      <svg id="mapSvg" class="finland-map" viewBox="0 0 420 560"></svg>
-    </div>
-
-    <div class="panel">
-      <input id="muniSearch" class="search" oninput="filterMunicipalities()" placeholder="Hae kuntaa tai maakuntaa...">
-      <div id="selectedBox">
-        <h2>Valitse kunta kartalta</h2>
-        <p>Tähän tulee kunnan tiedot ja muistiinpanot.</p>
-      </div>
-      <h3>Kunnat</h3>
-      <div id="muniList" class="list"></div>
-    </div>
-  </section>
-</div>
-<script src="script.js"></script>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="logo">🚌</span><span>Matkalla<br>Suomessa</span></div>
+      <button class="icon" onclick="showSearch()" title="Haku">🔍</button>
+    </header>
+    <main id="view"></main>
+    <nav class="bottomnav">
+      <button data-nav="home" onclick="go('home')">🏠<span>Koti</span></button>
+      <button data-nav="map" onclick="go('map')">🗺️<span>Kartta</span></button>
+      <button class="plus" onclick="go('newTrip')">＋</button>
+      <button data-nav="trips" onclick="go('trips')">🧳<span>Matka</span></button>
+      <button data-nav="profile" onclick="go('profile')">👤<span>Minä</span></button>
+    </nav>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

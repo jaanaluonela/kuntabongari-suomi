@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Päiväkirja - Suomen Matkakirja</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matkalla Suomessa</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header>🇫🇮 Suomen Matkakirja</header>
-<nav>
-  <a href="index.html">Etusivu</a>
-  <a href="kartta.html">Kartta</a>
-  <a class="active" href="paivakirja.html">Päiväkirja</a>
-  <a href="profiili.html">Profiili</a>
-</nav>
-<div class="container">
-  <div class="panel">
-    <h1>📖 Päiväkirja</h1>
-    <p>Muistiinpanot tulevat näkyviin, kun kirjoitat niitä karttasivulla kunnan tietoihin.</p>
-    <div id="diaryList" class="list"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="logo">🚌</span><span>Matkalla<br>Suomessa</span></div>
+      <button class="icon" onclick="showSearch()" title="Haku">🔍</button>
+    </header>
+    <main id="view"></main>
+    <nav class="bottomnav">
+      <button data-nav="home" onclick="go('home')">🏠<span>Koti</span></button>
+      <button data-nav="map" onclick="go('map')">🗺️<span>Kartta</span></button>
+      <button class="plus" onclick="go('newTrip')">＋</button>
+      <button data-nav="trips" onclick="go('trips')">🧳<span>Matka</span></button>
+      <button data-nav="profile" onclick="go('profile')">👤<span>Minä</span></button>
+    </nav>
   </div>
-</div>
-<script src="script.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
