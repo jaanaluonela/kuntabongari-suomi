@@ -1,11 +1,10 @@
-Matkalla Suomessa v9
+Matkalla Suomessa v11 - kartta
 
-Kopioi kaikki tämän kansion tiedostot matkalla-suomessa-kansioon ja valitse Korvaa kaikki.
-Päivitä selain Ctrl + F5.
+Uutta:
+- Parempi Suomen kartta -näkymä
+- Päijät-Häme nostettu ensimmäiseksi valmiiksi maakuntanäkymäksi
+- Maakunnan kuntalista
+- Kunnan oma sivu: käyty, päivä, muistiinpano ja suosikki
+- Tiedot tallentuvat selaimen localStorageen
 
-Uutta v9-versiossa:
-- etusivua viimeistelty
-- suuremmat ja selkeämmät painikkeet
-- Matkavinkit-osio siistitty
-- luotettavan tiedon muistutus
-- moderni mutta helppokäyttöinen ulkoasu
+GitHubiin: lataa tämän kansion SISÄLLÄ olevat tiedostot, ei zip-tiedostoa.

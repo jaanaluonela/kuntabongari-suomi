@@ -32,3 +32,70 @@ body{margin:0;font-family:Arial,system-ui,-apple-system,sans-serif;background:li
 /* v10: Omat matkat -näkymä */
 .page-head h1{font-size:34px;color:var(--dark);margin-bottom:6px}.page-head p{font-size:17px;color:var(--muted);line-height:1.35}.trip-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:#fff;border-radius:24px;padding:16px;margin:14px 0 16px;box-shadow:var(--shadow)}.trip-stats div{text-align:center}.trip-stats strong{display:block;font-size:27px;color:var(--green)}.trip-stats span{font-size:13px;color:var(--muted)}.trip-list{display:grid;gap:14px;margin-top:14px}.memory-card{display:grid;grid-template-columns:128px 1fr;background:#fff;border-radius:24px;box-shadow:var(--shadow);overflow:hidden;border:0;text-align:left;color:var(--text);cursor:pointer}.memory-card>img{width:128px;height:100%;min-height:170px;object-fit:cover}.memory-body{padding:14px}.memory-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.memory-top span{background:#e6f3ee;color:var(--green);font-weight:900;border-radius:999px;padding:5px 9px;font-size:13px}.memory-top button{background:#fff;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;padding:0;font-size:20px}.memory-card h3{font-size:22px;margin:3px 0;color:var(--dark)}.memory-card p{font-size:15px;color:var(--muted);margin:4px 0}.stars{letter-spacing:1px;margin:6px 0}.stars span{color:#d4d8d1;font-size:18px}.stars .on{color:#f5b942}.memory-card small{display:block;color:#52615b;font-size:14px;line-height:1.3}.memory-actions{display:flex;gap:8px;margin-top:10px}.memory-actions button{flex:1;padding:10px;border-radius:13px;background:#f3f8f5;font-size:14px}.save-wide{width:100%;margin-top:12px;border:0;background:var(--green);color:#fff;border-radius:22px;padding:18px;font-size:20px;font-weight:900;box-shadow:var(--shadow)}select{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px;font:inherit}.continue-card,.memory-card{transition:transform .15s ease}.continue-card:active,.memory-card:active{transform:scale(.99)}
 @media(max-width:520px){.memory-card{grid-template-columns:112px 1fr}.memory-card>img{width:112px;min-height:168px}.memory-body{padding:12px}.memory-card h3{font-size:19px}.memory-actions button{font-size:13px;padding:9px 6px}}
+
+/* v11: Kartta ja Päijät-Hämeen kuntien omat merkinnät */
+.map-title p{max-width:36rem}
+.featured-region{border:0;background:linear-gradient(135deg,#0b806f,#0f5e56);color:#fff;border-radius:28px;padding:22px;margin:16px 0 20px;box-shadow:0 14px 28px rgba(11,128,111,.25);display:grid;grid-template-columns:1fr 36px;align-items:center;gap:12px;text-align:left;cursor:pointer}
+.featured-region small{display:block;color:#d8fff4;font-weight:800;margin-bottom:4px}.featured-region h2{font-size:30px;margin:0 0 5px}.featured-region p{color:#ecfffb;line-height:1.35;margin:0 0 8px}.featured-region>span{font-size:42px;text-align:right}.featured-region .progress{background:rgba(255,255,255,.28);margin:12px 0 8px}.featured-region .progress span{background:#fff}.featured-region strong{color:#fff}
+.region-grid{margin-bottom:92px}.region-card.highlight{background:#dff5ed;border:2px solid rgba(11,128,111,.25)}.region-card.highlight strong:after{content:'  • aloitettu';font-size:12px;color:var(--green)}
+.region-hero{background:#fff;border-radius:28px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow)}.region-hero small{font-weight:900;color:var(--green)}.region-hero h1{font-size:34px;margin:6px 0}.region-hero p{color:var(--muted);font-weight:800}.region-hero .progress{margin-bottom:0}
+.municipality{gap:12px}.municipality span{display:flex;flex-direction:column;gap:3px}.municipality strong{font-size:18px}.municipality em{font-style:normal;font-size:13px;color:var(--muted);font-weight:700}.municipality.visited em{color:#e6fff8}.municipality small{min-width:70px;text-align:right}
+.municipality-head{background:#fff;border-radius:26px;padding:20px;box-shadow:var(--shadow);margin-bottom:14px}.save-wide.done{background:#34524c}.check-row{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:14px 16px;margin:14px 0;box-shadow:var(--shadow);font-weight:900}.check-row input{width:22px;height:22px;accent-color:var(--green)}
+@media(max-width:520px){.featured-region{border-radius:24px;padding:18px}.featured-region h2{font-size:26px}.region-hero h1{font-size:30px}.region-card.highlight strong:after{display:block;margin-top:3px}.municipality strong{font-size:17px}}
+
+
+/* v12: visuaalinen Suomen maakuntakartta */
+.v12-map-head h1{font-size:34px}.v12-map-head p{font-size:16px;line-height:1.45;color:var(--muted)}
+.map-progress-card{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:#fff;border-radius:24px;padding:14px;margin:10px 0 16px;box-shadow:var(--shadow)}
+.map-progress-card div{text-align:center;background:#f4faf6;border-radius:18px;padding:13px 6px}.map-progress-card strong{display:block;font-size:25px;color:var(--green)}.map-progress-card span{font-size:12px;color:var(--muted);font-weight:800}
+.finland-map-card{background:linear-gradient(180deg,#ffffff,#edf7f2);border-radius:30px;padding:18px;margin:14px 0 22px;box-shadow:var(--shadow);border:1px solid rgba(17,118,108,.08)}
+.finland-silhouette{position:relative;height:470px;margin:auto;max-width:320px;background:linear-gradient(180deg,#dff5ec,#f8fff9);border:2px solid rgba(17,118,108,.16);box-shadow:inset 0 0 0 9px rgba(255,255,255,.55);clip-path:polygon(47% 1%,59% 4%,67% 13%,65% 23%,73% 31%,70% 43%,78% 52%,72% 63%,81% 76%,72% 88%,58% 97%,42% 94%,32% 86%,24% 79%,30% 67%,22% 58%,28% 47%,21% 36%,30% 25%,28% 13%,38% 6%);border-radius:46% 48% 42% 44%;overflow:visible}.finland-glow{position:absolute;inset:18px;background:radial-gradient(circle at 60% 20%,rgba(255,255,255,.9),transparent 45%),radial-gradient(circle at 50% 70%,rgba(17,118,108,.12),transparent 60%);clip-path:inherit}
+.map-pin{position:absolute;transform:translate(-50%,-50%);z-index:2;width:52px;min-height:52px;border:2px solid rgba(17,118,108,.25);background:#fff;color:var(--dark);border-radius:18px;box-shadow:0 9px 20px rgba(16,36,50,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;padding:4px;transition:transform .16s ease, background .16s ease}.map-pin span{font-size:22px;line-height:1}.map-pin small{font-size:10px;color:var(--muted);margin-top:2px}.map-pin.started{background:#11766c;color:#fff;border-color:#0b5f57}.map-pin.started small{color:#eafff8}.map-pin.complete{background:linear-gradient(135deg,#d4a838,#ffe9a6);border-color:#c39221;color:#3c2d00}.map-pin:active{transform:translate(-50%,-50%) scale(.94)}
+.map-help{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted);font-size:14px}.map-help strong{color:var(--green)}
+.region-highlight-row{display:grid;grid-template-columns:1fr;gap:10px}.mini-region-card{background:#fff;border:0;border-radius:20px;padding:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:42px 1fr 70px;gap:10px;align-items:center;text-align:left}.mini-region-card span{font-size:28px}.mini-region-card strong{font-size:18px}.mini-region-card small{color:var(--muted);font-weight:800}.mini-region-card .progress{grid-column:2/4;margin:0;height:7px}.mini-region-card .progress i{display:block;height:100%;background:var(--green);border-radius:99px}
+.v12-region-grid .region-card{position:relative;background:#fff;border:1px solid rgba(17,118,108,.08);box-shadow:0 6px 16px rgba(16,36,50,.07);min-height:104px}.v12-region-grid .region-card.started{background:#e7f6ef;border-color:rgba(17,118,108,.28)}.v12-region-grid .region-card.complete{background:linear-gradient(135deg,#fff7d8,#f1d483);color:#3b2f00}.region-emoji{font-size:28px;display:block;margin-bottom:4px}
+@media(max-width:520px){.finland-silhouette{height:425px;max-width:295px}.map-pin{width:48px;min-height:48px;border-radius:16px}.map-pin span{font-size:20px}.map-progress-card{gap:7px;padding:10px}.map-progress-card strong{font-size:22px}.mini-region-card{grid-template-columns:38px 1fr 64px}}
+
+/* v13 – siistimpi maakunta- ja kunnanäkymä */
+.v13-region-hero{
+  position:relative;
+  overflow:hidden;
+  padding-top:28px;
+  border:1px solid rgba(10,80,61,.08);
+  background:linear-gradient(135deg,#f6fff9 0%,#eef7f1 55%,#fff9ed 100%);
+}
+.v13-region-hero.complete{background:linear-gradient(135deg,#fff8d9,#f2fff4)}
+.region-badge{
+  width:64px;height:64px;border-radius:22px;
+  display:grid;place-items:center;font-size:32px;
+  background:rgba(255,255,255,.75);box-shadow:0 10px 26px rgba(20,70,50,.10);
+  margin-bottom:10px;
+}
+.win-note{display:block;margin-top:10px;color:#0b6b4b;font-size:14px}.win-note.muted{color:#6b7b73}
+.municipality-list{display:grid;gap:12px;margin:0 16px 120px}
+.municipality-row{
+  width:100%;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:10px;
+  min-height:76px;padding:14px 14px;border:0;border-radius:22px;
+  background:#fff;box-shadow:0 10px 24px rgba(28,57,43,.08);text-align:left;color:#183428;
+}
+.municipality-row.visited{background:linear-gradient(135deg,#e4f7ed,#f5fff8);border:1px solid rgba(19,128,87,.18)}
+.mun-status{width:34px;height:34px;border-radius:14px;background:#eef5ef;display:grid;place-items:center;font-weight:900;color:#0b6b4b}
+.municipality-row.visited .mun-status{background:#0b7b57;color:#fff}
+.mun-text strong{display:block;font-size:18px;line-height:1.1}.mun-text em{display:block;margin-top:5px;font-style:normal;color:#6a7a72;font-size:14px}
+.mun-open{font-weight:800;color:#0b6b4b;white-space:nowrap;font-size:14px}.municipality-row:active{transform:scale(.99)}
+.municipality-hero{
+  margin:16px;border-radius:30px;padding:28px 22px;color:#10251c;
+  background:linear-gradient(150deg,#f7faf8 0%,#eaf4ef 60%,#fff 100%);
+  box-shadow:0 16px 36px rgba(19,61,42,.12);border:1px solid rgba(10,80,61,.08)
+}
+.municipality-hero.visited{background:linear-gradient(150deg,#dff8ea,#f7fff9)}
+.municipality-icon{width:70px;height:70px;border-radius:26px;background:#fff;display:grid;place-items:center;font-size:34px;box-shadow:0 12px 28px rgba(15,76,51,.12);margin-bottom:14px}
+.municipality-hero small{color:#0b6b4b;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.municipality-hero h1{font-size:38px;margin:6px 0}.municipality-hero p{margin:0;color:#50655b;font-weight:700}
+.mun-quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 12px}.quick{border:0;border-radius:18px;background:#eef5ef;padding:14px;font-weight:900;color:#194334}.quick.active{background:#0b7b57;color:#fff}
+.v13-form{margin:0 16px 20px;padding:18px;border-radius:26px;background:#fff;box-shadow:0 12px 30px rgba(32,56,44,.09)}
+.mun-tools{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 16px 120px}.mun-tool{border:0;border-radius:22px;background:#fff;padding:16px 12px;min-height:112px;box-shadow:0 10px 24px rgba(28,57,43,.08);text-align:left}.mun-tool span{font-size:28px;display:block;margin-bottom:8px}.mun-tool strong{display:block;font-size:17px}.mun-tool small{display:block;margin-top:5px;color:#6b7b73;font-weight:700}
+.v12-region-grid .region-card{min-height:108px;padding:18px;border-radius:26px;box-shadow:0 12px 26px rgba(28,57,43,.08)}
+.region-highlight-row{gap:14px}.mini-region-card{border-radius:24px;min-height:104px;padding:16px}
+.finland-map-card{border-radius:30px;box-shadow:0 16px 38px rgba(19,61,42,.12)}
+.map-pin{box-shadow:0 8px 18px rgba(0,0,0,.10)}
+@media (max-width:420px){.municipality-hero h1{font-size:32px}.mun-tools{grid-template-columns:1fr 1fr}.municipality-row{grid-template-columns:36px 1fr auto;padding:13px 12px}.mun-text strong{font-size:17px}}

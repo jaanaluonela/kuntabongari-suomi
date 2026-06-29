@@ -106,7 +106,7 @@ function renderMap(){
   view.innerHTML = `
     <section class="page-head map-title v12-map-head">
       <h1>🗺️ Suomen kartta</h1>
-      <p>Napauta maakuntaa kartalta tai listasta. Käydyt kunnat tallentuvat automaattisesti tähän laitteeseen.</p>
+      <p>Selkeämpi kartta, suuremmat maakuntakortit ja parempi etenemisen seuranta.</p>
     </section>
 
     <div class="map-progress-card">
@@ -150,27 +150,97 @@ function renderRegion(region){
   setActive('map');
   const s=regionStats(region);
   const visited=getVisited();
-  view.innerHTML = `<button class="back" onclick="go('map')">‹ Maakunnat</button><section class="region-hero"><small>Maakunta</small><h1>📍 ${region}</h1><p>${s.done}/${s.total} kuntaa käyty • ${s.pct}% valmis</p><div class="progress"><span style="width:${s.pct}%"></span></div></section>
+  const meta=REGION_META[region] || {emoji:'📍'};
+  const complete = s.pct === 100;
+  view.innerHTML = `
+    <button class="back" onclick="go('map')">‹ Maakunnat</button>
+    <section class="region-hero v13-region-hero ${complete?'complete':''}">
+      <div class="region-badge">${meta.emoji}</div>
+      <small>Maakunta</small>
+      <h1>${complete?'🏆 ':''}${region}</h1>
+      <p>${s.done}/${s.total} kuntaa käyty • ${s.pct}% valmis</p>
+      <div class="progress"><span style="width:${s.pct}%"></span></div>
+      ${complete?'<strong class="win-note">Maakunta valmis! ⭐</strong>':'<strong class="win-note muted">Jatka rauhassa yksi kunta kerrallaan.</strong>'}
+    </section>
     <section class="section-head"><h2>Kunnat</h2><button onclick="markWholeRegion('${escapeHtml(region)}')">Merkitse kaikki</button></section>
-    <div class="map-grid municipalities">${REGIONS[region].map(m=>{const detail=getMunicipalityDetail(m.code); const isVisited=visited.includes(m.code); return `<button class="municipality ${isVisited?'visited':''}" onclick="go('municipality/${slugify(m.name)}')"><span><strong>${m.name}</strong><em>${detail.date?escapeHtml(detail.date):'Ei päivää'}</em></span><small>${isVisited?'✓ Käyty':'Avaa'}</small></button>`}).join('')}</div>`;
+    <div class="municipality-list v13-list">
+      ${REGIONS[region].map(m=>{
+        const detail=getMunicipalityDetail(m.code);
+        const isVisited=visited.includes(m.code);
+        const sub = isVisited ? (detail.date ? escapeHtml(formatDate(detail.date)) : 'Käyty — lisää päivä') : 'Ei vielä käyty';
+        const fav = detail.favourite ? '⭐ ' : '';
+        return `<button class="municipality-row ${isVisited?'visited':''}" onclick="go('municipality/${slugify(m.name)}')">
+          <span class="mun-status">${isVisited?'✓':'○'}</span>
+          <span class="mun-text"><strong>${fav}${m.name}</strong><em>${sub}</em></span>
+          <span class="mun-open">${isVisited?'Muokkaa':'Avaa'} ›</span>
+        </button>`
+      }).join('')}
+    </div>`;
+}
+function formatDate(value){
+  if(!value) return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(value)){
+    const [y,m,d]=value.split('-');
+    return `${d}.${m}.${y}`;
+  }
+  return value;
 }
 function renderMunicipality(slug){
   const m=allMunicipalities.find(x=>slugify(x.name)===slug); if(!m) return renderSearch();
   setActive('map');
   const isVisited=getVisited().includes(m.code);
   const d=getMunicipalityDetail(m.code);
-  view.innerHTML = `<button class="back" onclick="go('region/${slugify(m.region)}')">‹ ${m.region}</button><section class="page-head municipality-head"><h1>${d.favourite?'⭐ ':''}${m.name}</h1><p>${m.region}</p></section>
-    <button class="save-wide ${isVisited?'done':''}" onclick="toggleMunicipality('${m.code}')">${isVisited?'✓ Käyty — poista merkintä':'✓ Merkitse käydyksi'}</button>
-    <label class="field"><span>📅 Käyntipäivä</span><input id="munDate" type="date" value="${escapeHtml(d.date)}"></label>
-    <label class="field"><span>📝 Oma muistiinpano</span><textarea id="munNote" rows="5" placeholder="Mitä jäi mieleen? Esim. hyvä matkaparkki, kahvila tai maisema.">${escapeHtml(d.note||'')}</textarea></label>
-    <label class="check-row"><input id="munFav" type="checkbox" ${d.favourite?'checked':''}> <span>⭐ Lisää suosikiksi</span></label>
-    <button class="save-wide" onclick="saveMunicipality('${m.code}')">💾 Tallenna kunnan tiedot</button>
+  const rating = Number(d.rating || 0);
+  view.innerHTML = `
+    <button class="back" onclick="go('region/${slugify(m.region)}')">‹ ${m.region}</button>
+    <section class="municipality-hero ${isVisited?'visited':''}">
+      <div class="municipality-icon">${isVisited?'✅':'📍'}</div>
+      <small>${m.region}</small>
+      <h1>${d.favourite?'⭐ ':''}${m.name}</h1>
+      <p>${isVisited ? 'Käyty' : 'Ei vielä käyty'}${d.date ? ' • '+escapeHtml(formatDate(d.date)) : ''}</p>
+    </section>
+
+    <div class="mun-quick-actions">
+      <button class="quick ${isVisited?'active':''}" onclick="toggleMunicipality('${m.code}')">${isVisited?'✓ Käyty':'Merkitse käydyksi'}</button>
+      <button class="quick" onclick="document.getElementById('munFav').checked=!document.getElementById('munFav').checked; saveMunicipality('${m.code}', true)">${d.favourite?'⭐ Suosikki':'☆ Suosikki'}</button>
+    </div>
+
+    <section class="soft-card v13-form">
+      <label class="field"><span>📅 Käyntipäivä</span><input id="munDate" type="date" value="${escapeHtml(d.date)}"></label>
+      <label class="field"><span>⭐ Oma arvio</span><select id="munRating">
+        <option value="0" ${rating===0?'selected':''}>Ei arviota</option>
+        <option value="5" ${rating===5?'selected':''}>★★★★★ Erinomainen</option>
+        <option value="4" ${rating===4?'selected':''}>★★★★☆ Hyvä</option>
+        <option value="3" ${rating===3?'selected':''}>★★★☆☆ Ihan ok</option>
+        <option value="2" ${rating===2?'selected':''}>★★☆☆☆ Ei erityinen</option>
+        <option value="1" ${rating===1?'selected':''}>★☆☆☆☆ En menisi uudestaan</option>
+      </select></label>
+      <label class="field"><span>📝 Oma muistiinpano</span><textarea id="munNote" rows="5" placeholder="Mitä jäi mieleen? Esim. hyvä matkaparkki, kahvila tai maisema.">${escapeHtml(d.note||'')}</textarea></label>
+      <label class="check-row"><input id="munFav" type="checkbox" ${d.favourite?'checked':''}> <span>⭐ Lisää suosikiksi</span></label>
+      <button class="save-wide" onclick="saveMunicipality('${m.code}')">💾 Tallenna kunnan tiedot</button>
+    </section>
+
+    <section class="section-head"><h2>Lisää kuntaan</h2><button onclick="alert('Tiedot tallentuvat seuraavissa versioissa tarkemmin.')">Ohje</button></section>
+    <div class="mun-tools">
+      ${munTool('📸','Kuvat','Lisää omia matkakuvia')}
+      ${munTool('🚐','Matkaparkit','Omat havainnot')}
+      ${munTool('🏕️','Leirintäalueet','Ei arvattuja hintoja')}
+      ${munTool('🍽️','Ravintolat','Hyvät ruokapaikat')}
+      ${munTool('☕','Kahvilat','Pysähdyspaikat')}
+      ${munTool('📍','Nähtävyydet','Kohteet ja muistot')}
+    </div>
     <article class="trust-strip"><strong>Luotettava tieto</strong><span>Tähän tallennetaan omat kokemuksesi. Muuttuvia hintoja tai palveluita ei arvata.</span></article>`;
 }
-function saveMunicipality(code){
-  updateMunicipalityDetail(code, {date:document.getElementById('munDate').value, note:document.getElementById('munNote').value.trim(), favourite:document.getElementById('munFav').checked});
+function munTool(icon,title,meta){ return `<button class="mun-tool" onclick="go('tripSection/${slugify(title)}')"><span>${icon}</span><strong>${title}</strong><small>${meta}</small></button>`; }
+function saveMunicipality(code, silent=false){
+  updateMunicipalityDetail(code, {
+    date:document.getElementById('munDate').value,
+    note:document.getElementById('munNote').value.trim(),
+    favourite:document.getElementById('munFav').checked,
+    rating:Number(document.getElementById('munRating')?.value || 0)
+  });
   if(!getVisited().includes(code)) setVisited([...getVisited(), code]);
-  alert('Tallennettu');
+  if(!silent) alert('Tallennettu');
   route();
 }
 function markWholeRegion(region){
