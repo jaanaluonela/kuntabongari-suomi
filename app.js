@@ -2,31 +2,34 @@ const STORAGE_KEY = "matkallaSuomessaVisited_v16"; // pidetään sama avain, jot
 const TRIPS_KEY = "matkallaSuomessaTrips_v16";
 const MUNICIPALITY_KEY = "matkallaSuomessaMunicipalityDetails_v16";
 const LOGBOOK_KEY = "matkallaSuomessaCaravanLogbook_v16";
+const CHECKLIST_KEY = "matkallaSuomessaChecklist_v18";
+const DAYPLAN_KEY = "matkallaSuomessaDayPlan_v18";
+const SERVICE_NOTES_KEY = "matkallaSuomessaServiceNotes_v18";
 
 const view = document.getElementById('view');
 const regionSlugs = Object.fromEntries(Object.keys(REGIONS).map(name => [slugify(name), name]));
 const allMunicipalities = Object.entries(REGIONS).flatMap(([region, list]) => list.map(item => ({...item, region})));
 
 const regionMeta = {
-  "Lappi": {abbr:"L", emoji:"❄️", x:55, y:13},
-  "Pohjois-Pohjanmaa": {abbr:"PP", emoji:"🌲", x:46, y:38},
-  "Kainuu": {abbr:"K", emoji:"🫐", x:66, y:43},
-  "Keski-Pohjanmaa": {abbr:"KP", emoji:"🌾", x:32, y:53},
-  "Pohjanmaa": {abbr:"P", emoji:"🌊", x:26, y:62},
-  "Etelä-Pohjanmaa": {abbr:"EP", emoji:"🌾", x:37, y:66},
-  "Keski-Suomi": {abbr:"KS", emoji:"🌿", x:52, y:67},
-  "Pohjois-Savo": {abbr:"PS", emoji:"🌲", x:64, y:62},
-  "Pohjois-Karjala": {abbr:"PK", emoji:"🦌", x:76, y:62},
-  "Etelä-Savo": {abbr:"ES", emoji:"🌊", x:65, y:75},
-  "Etelä-Karjala": {abbr:"EK", emoji:"🏰", x:76, y:83},
-  "Kymenlaakso": {abbr:"KY", emoji:"⚓", x:66, y:88},
-  "Päijät-Häme": {abbr:"PH", emoji:"📍", x:54, y:83},
-  "Kanta-Häme": {abbr:"KH", emoji:"🌳", x:46, y:86},
-  "Pirkanmaa": {abbr:"PI", emoji:"🏙️", x:43, y:78},
-  "Satakunta": {abbr:"S", emoji:"🌅", x:30, y:82},
-  "Varsinais-Suomi": {abbr:"VS", emoji:"⚓", x:39, y:92},
-  "Uusimaa": {abbr:"U", emoji:"🏙️", x:55, y:93},
-  "Ahvenanmaa": {abbr:"Å", emoji:"⛵", x:18, y:91}
+  "Lappi": {abbr:"L", emoji:"❄️", x:54, y:13},
+  "Pohjois-Pohjanmaa": {abbr:"PP", emoji:"🌲", x:49, y:31},
+  "Kainuu": {abbr:"K", emoji:"🫐", x:64, y:36},
+  "Keski-Pohjanmaa": {abbr:"KP", emoji:"🌾", x:35, y:44},
+  "Pohjanmaa": {abbr:"P", emoji:"🌊", x:29, y:52},
+  "Etelä-Pohjanmaa": {abbr:"EP", emoji:"🌾", x:39, y:57},
+  "Keski-Suomi": {abbr:"KS", emoji:"🌿", x:51, y:58},
+  "Pohjois-Savo": {abbr:"PS", emoji:"🌲", x:61, y:55},
+  "Pohjois-Karjala": {abbr:"PK", emoji:"🦌", x:72, y:55},
+  "Etelä-Savo": {abbr:"ES", emoji:"🌊", x:62, y:67},
+  "Etelä-Karjala": {abbr:"EK", emoji:"🏰", x:72, y:78},
+  "Kymenlaakso": {abbr:"K", emoji:"⚓", x:65, y:85},
+  "Päijät-Häme": {abbr:"PH", emoji:"📍", x:52, y:78},
+  "Kanta-Häme": {abbr:"KH", emoji:"🌳", x:45, y:82},
+  "Pirkanmaa": {abbr:"PI", emoji:"🏙️", x:42, y:72},
+  "Satakunta": {abbr:"S", emoji:"🌅", x:31, y:76},
+  "Varsinais-Suomi": {abbr:"VS", emoji:"⚓", x:35, y:90},
+  "Uusimaa": {abbr:"U", emoji:"🏙️", x:53, y:91},
+  "Ahvenanmaa": {abbr:"Å", emoji:"⛵", x:18, y:95}
 };
 
 const sampleTrips = [
@@ -43,6 +46,12 @@ function getLogbook(){ return JSON.parse(localStorage.getItem(LOGBOOK_KEY) || "n
   {date:'29.6.2026', place:'Vääksy', overnight:'Matkaparkki / yöpaikka', services:['Vesi','WC'], mood:5, note:'Rauhallinen paikka, hyvä iltakävely kanavalla.', morning:'Hyvä lähtö aamulla.'}
 ]; }
 function setLogbook(list){ localStorage.setItem(LOGBOOK_KEY, JSON.stringify(list)); }
+function getChecklist(){ return JSON.parse(localStorage.getItem(CHECKLIST_KEY) || "null") || {}; }
+function setChecklist(data){ localStorage.setItem(CHECKLIST_KEY, JSON.stringify(data)); }
+function getDayPlans(){ return JSON.parse(localStorage.getItem(DAYPLAN_KEY) || "[]"); }
+function setDayPlans(list){ localStorage.setItem(DAYPLAN_KEY, JSON.stringify(list)); }
+function getServiceNotes(){ return JSON.parse(localStorage.getItem(SERVICE_NOTES_KEY) || "[]"); }
+function setServiceNotes(list){ localStorage.setItem(SERVICE_NOTES_KEY, JSON.stringify(list)); }
 function getMunicipalityDetails(){ return JSON.parse(localStorage.getItem(MUNICIPALITY_KEY) || "{}"); }
 function setMunicipalityDetails(data){ localStorage.setItem(MUNICIPALITY_KEY, JSON.stringify(data)); }
 function getMunicipalityDetail(code){ return getMunicipalityDetails()[code] || {date:'', note:'', favourite:false, rating:5, photos:0}; }
@@ -54,7 +63,7 @@ function setActive(name){ document.querySelectorAll('.bottomnav button').forEach
 function go(page){ location.hash = page; }
 function showSearch(){ go('search'); }
 function defaultPageFromFile(){ const file=(location.pathname.split('/').pop()||'index.html').toLowerCase(); if(file==='kartta.html')return'map'; if(file==='paijat-hame.html')return'region/paijat-hame'; if(file==='paivakirja.html')return'trips'; if(file==='profiili.html')return'profile'; return'home'; }
-function route(){ const hash=decodeURIComponent(location.hash.replace(/^#/,''))||defaultPageFromFile(); if(hash.startsWith('region/'))return renderRegion(regionSlugs[hash.split('/')[1]]||'Päijät-Häme'); if(hash.startsWith('municipality/'))return renderMunicipality(hash.split('/')[1]); if(hash==='map')return renderMap(); if(hash==='trips')return renderTrips(); if(hash==='logbook')return renderLogbook(); if(hash==='newLog')return renderNewLogEntry(); if(hash.startsWith('newLog/'))return renderNewLogEntry(hash.split('/')[1]); if(hash==='newTrip')return renderNewTrip(); if(hash==='profile')return renderProfile(); if(hash==='search')return renderSearch(); if(hash==='favourites')return renderFavourites(); return renderHome(); }
+function route(){ const hash=decodeURIComponent(location.hash.replace(/^#/,''))||defaultPageFromFile(); if(hash.startsWith('region/'))return renderRegion(regionSlugs[hash.split('/')[1]]||'Päijät-Häme'); if(hash.startsWith('municipality/'))return renderMunicipality(hash.split('/')[1]); if(hash==='map')return renderMap(); if(hash==='trips')return renderTrips(); if(hash==='logbook')return renderLogbook(); if(hash==='newLog')return renderNewLogEntry(); if(hash.startsWith('newLog/'))return renderNewLogEntry(hash.split('/')[1]); if(hash==='newTrip')return renderNewTrip(); if(hash==='profile')return renderProfile(); if(hash==='search')return renderSearch(); if(hash==='favourites')return renderFavourites(); if(hash==='checklists')return renderChecklists(); if(hash==='dayplan')return renderDayPlan(); if(hash==='services')return renderServices(); if(hash==='backup')return renderBackupPage(); if(hash==='achievements')return renderAchievements(); return renderHome(); }
 function totalStats(){ const visited=getVisited().length; const total=allMunicipalities.length; return {visited,total,pct:percent(visited,total)}; }
 function regionStats(region){ const visited=getVisited(); const total=REGIONS[region].length; const done=REGIONS[region].filter(m=>visited.includes(m.code)).length; return {done,total,pct:percent(done,total)}; }
 function regionClass(region){ const s=regionStats(region); if(s.pct===100) return 'complete'; if(s.pct>0) return 'started'; return ''; }
@@ -72,36 +81,14 @@ function renderHome(){
     <section class="section-head"><h2>Omat muistot</h2><button onclick="go('trips')">Näytä kaikki ›</button></section>
     <div class="memory-row"><div><strong>${trips.length}</strong><span>Matkaa</span></div><div><strong>${favs}</strong><span>Suosikkia</span></div><div><strong>${Object.keys(getMunicipalityDetails()).length}</strong><span>Muistiinpanoa</span></div></div>
     <section class="section-head"><h2>Karavaanarin kaveri</h2><button onclick="go('logbook')">Avaa ›</button></section>
-    <article class="logbook-teaser" onclick="go('logbook')"><span>📒</span><div><strong>Lokikirja</strong><p>Yöpaikat, palvelut, tunnelmat ja aamun muistiinpanot. Ei kilometrejä.</p></div><em>›</em></article>`;
+    <article class="logbook-teaser" onclick="go('logbook')"><span>📒</span><div><strong>Lokikirja</strong><p>Yöpaikat, palvelut, tunnelmat ja aamun muistiinpanot. Ei kilometrejä.</p></div><em>›</em></article>
+    <div class="buddy-grid"><button onclick="go('checklists')">✅<strong>Lähtölista</strong><small>Muista ennen lähtöä</small></button><button onclick="go('dayplan')">🗓️<strong>Päivän suunnitelma</strong><small>Pysähdykset ja muistot</small></button><button onclick="go('services')">💧<strong>Huoltopisteet</strong><small>Vesi, tyhjennys, sähkö</small></button><button onclick="go('achievements')">🏆<strong>Saavutukset</strong><small>Motivaatiota matkaan</small></button></div>`;
 }
 
-function miniFinlandMap(){ return `<svg class="mini-map" viewBox="0 0 300 560" aria-hidden="true"><path d="M154 13 C129 18 110 39 105 68 C101 94 118 116 108 138 C99 157 78 159 71 181 C62 212 84 229 75 258 C67 284 45 302 51 331 C56 354 75 370 70 397 C63 435 88 456 118 474 C143 489 164 513 191 500 C215 488 213 456 201 432 C190 410 201 391 222 375 C250 354 256 320 236 294 C222 275 230 254 246 232 C265 205 250 177 225 164 C204 153 202 132 216 109 C233 79 220 44 196 27 C183 18 170 10 154 13 Z"/><path d="M86 471 C61 472 45 489 42 515 C54 507 71 508 83 521 C95 505 94 487 86 471 Z"/></svg>`; }
+function miniFinlandMap(){ return `<svg class="mini-map" viewBox="0 0 220 420" aria-hidden="true"><path d="M120 8 C88 20 76 56 82 88 C89 122 60 126 51 158 C41 194 66 206 50 243 C36 275 62 292 48 323 C38 348 55 378 86 397 C121 419 160 404 168 366 C175 332 154 312 170 281 C188 247 160 226 175 190 C191 151 154 139 161 104 C168 65 151 18 120 8 Z" /></svg>`; }
 function renderFinlandMap(){
-  const labels = Object.keys(regionMeta).map(region=>{
-    const m=regionMeta[region], st=regionStats(region), cls=regionClass(region);
-    return `<button class="map-pin ${cls}" style="left:${m.x}%;top:${m.y}%" onclick="go('region/${slugify(region)}')" title="${region}"><b>${m.abbr}</b><small>${st.pct}%</small></button>`
-  }).join('');
-  return `<section class="finland-card real-map-card">
-    <div class="map-title-row"><div><strong>🇫🇮 Suomen kartta</strong><span>Valitse maakunta kartalta</span></div></div>
-    <div class="finland-stage real-finland-stage">
-      <svg class="finland-outline real-finland" viewBox="0 0 300 560" role="img" aria-label="Suomen kartta">
-        <defs>
-          <linearGradient id="landV19" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#d7f5e8"/><stop offset="1" stop-color="#f4fbf6"/></linearGradient>
-          <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="12" flood-color="#0f3d35" flood-opacity="0.20"/></filter>
-        </defs>
-        <path class="land-main" d="M154 13 C129 18 110 39 105 68 C101 94 118 116 108 138 C99 157 78 159 71 181 C62 212 84 229 75 258 C67 284 45 302 51 331 C56 354 75 370 70 397 C63 435 88 456 118 474 C143 489 164 513 191 500 C215 488 213 456 201 432 C190 410 201 391 222 375 C250 354 256 320 236 294 C222 275 230 254 246 232 C265 205 250 177 225 164 C204 153 202 132 216 109 C233 79 220 44 196 27 C183 18 170 10 154 13 Z"/>
-        <path class="aland" d="M86 471 C61 472 45 489 42 515 C54 507 71 508 83 521 C95 505 94 487 86 471 Z"/>
-        <path class="lake big" d="M153 214 C132 226 126 253 143 272 C160 291 187 278 185 249 C184 227 170 216 153 214 Z"/>
-        <path class="lake" d="M165 310 C148 326 149 350 168 359 C187 367 204 349 197 329 C191 313 179 306 165 310 Z"/>
-        <path class="lake small" d="M120 337 C105 348 104 366 117 374 C132 383 148 371 143 354 C139 341 131 335 120 337 Z"/>
-        <path class="coast" d="M73 400 C49 403 31 430 36 458 C39 477 53 492 70 501"/>
-        <path class="coast" d="M58 331 C31 334 18 363 31 389"/>
-        <path class="coast east" d="M230 287 C251 308 247 342 222 365"/>
-      </svg>
-      ${labels}
-    </div>
-    <div class="legend"><span><i></i>Aloittamatta</span><span><i class="started"></i>Aloitettu</span><span><i class="complete"></i>Valmis</span></div>
-  </section>`;
+  const labels = Object.keys(regionMeta).map(region=>{const m=regionMeta[region], st=regionStats(region), cls=regionClass(region); return `<button class="map-pin ${cls}" style="left:${m.x}%;top:${m.y}%" onclick="go('region/${slugify(region)}')" title="${region}"><b>${m.abbr}</b><small>${st.pct}%</small></button>`}).join('');
+  return `<section class="finland-card"><div class="finland-stage"><svg class="finland-outline" viewBox="0 0 260 500" role="img" aria-label="Suomen kartta"><defs><linearGradient id="land" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#dff5ea"/><stop offset="1" stop-color="#edf8f1"/></linearGradient></defs><path class="land" d="M143 10 C111 18 91 47 97 88 C103 129 69 134 58 172 C48 207 78 219 59 259 C42 294 72 309 55 348 C40 383 62 422 96 446 C135 474 181 455 189 409 C196 370 173 351 191 315 C212 273 177 253 195 211 C218 158 172 152 180 108 C187 66 176 20 143 10 Z"/><path class="lake" d="M126 177 C111 194 105 214 119 232 C134 251 158 238 157 215 C157 195 143 182 126 177 Z"/><path class="lake" d="M141 251 C126 267 127 289 144 300 C162 310 178 295 172 276 C168 260 155 251 141 251 Z"/><path class="shore" d="M74 438 C55 428 41 409 36 387"/><path class="shore" d="M51 347 C31 347 22 369 34 386"/></svg>${labels}</div><div class="legend"><span><i></i>Aloittamatta</span><span><i class="started"></i>Aloitettu</span><span><i class="complete"></i>Valmis</span></div></section>`;
 }
 
 function renderMap(){
@@ -199,7 +186,54 @@ function renderProfile(){ setActive('profile'); const s=totalStats(); view.inner
 function renderSearch(){ setActive(null); view.innerHTML=`<section class="page-head"><h1>🔍 Haku</h1><p>Hae kuntaa tai maakuntaa.</p></section><input class="search" placeholder="Kirjoita kunnan nimi..." oninput="doSearch(this.value)"><div id="searchResults" class="mini-list"></div>`; }
 function doSearch(q){ const r=allMunicipalities.filter(m=>(m.name+' '+m.region).toLowerCase().includes(String(q).toLowerCase())).slice(0,40); document.getElementById('searchResults').innerHTML=r.map(m=>`<div onclick="go('municipality/${slugify(m.name)}')"><span>${m.name}</span><small>${m.region}</small></div>`).join('')||'<p>Ei tuloksia.</p>'; }
 function renderFavourites(){ const items=allMunicipalities.filter(m=>getMunicipalityDetail(m.code).favourite); view.innerHTML=`<button class="back" onclick="go('home')">‹ Koti</button><section class="page-head"><h1>❤️ Suosikit</h1><p>Lempipaikkasi yhdessä näkymässä.</p></section><div class="mini-list">${items.map(m=>`<div onclick="go('municipality/${slugify(m.name)}')"><span>${m.name}</span><small>${m.region}</small></div>`).join('')||'<p>Ei suosikkeja vielä.</p>'}</div>`; }
-function openMenu(){ document.body.insertAdjacentHTML('beforeend',`<div class="sheet-backdrop" onclick="this.remove()"><div class="sheet" onclick="event.stopPropagation()"><button class="sheet-close" onclick="document.querySelector('.sheet-backdrop').remove()">×</button><h2>Valikko</h2><button onclick="go('favourites')">❤️ Suosikit</button><button onclick="go('logbook')">📒 Lokikirja</button><button onclick="go('search')">🔍 Haku</button><button onclick="go('profile')">📊 Tilastot</button><button onclick="showBackup()">☁️ Varmuuskopio</button></div></div>`); }
+function openMenu(){ document.body.insertAdjacentHTML('beforeend',`<div class="sheet-backdrop" onclick="this.remove()"><div class="sheet" onclick="event.stopPropagation()"><button class="sheet-close" onclick="document.querySelector('.sheet-backdrop').remove()">×</button><h2>Valikko</h2><button onclick="go('favourites')">❤️ Suosikit</button><button onclick="go('logbook')">📒 Lokikirja</button><button onclick="go('checklists')">✅ Lähtölista</button><button onclick="go('dayplan')">🗓️ Päivän suunnitelma</button><button onclick="go('services')">💧 Huoltopisteet</button><button onclick="go('search')">🔍 Haku</button><button onclick="go('profile')">📊 Tilastot</button><button onclick="go('backup')">☁️ Varmuuskopio</button></div></div>`); }
+
+
+const checklistSections = [
+  {id:'lahto', title:'Ennen lähtöä', items:['Kaasu kiinni / tarkistettu','Jääkaappi matkalle sopivaksi','Ikkunat ja kattoluukut kiinni','Sähköjohto irrotettu','Portaat ja markiisi sisään','Kaapit ja laatikot kiinni','Koirien tavarat mukana']},
+  {id:'yo', title:'Yöpaikalla', items:['Auto suorassa','Sähkö tarvittaessa','Vesi riittää','WC / kasetti tarkistettu','Roskien paikka katsottu','Koirien ulkoilureitti katsottu','Hiljaisuus ja turvallisuus arvioitu']},
+  {id:'huolto', title:'Huolto ja mukavuus', items:['Juomavesi täytetty','Harmaavesi tyhjennetty','WC tyhjennetty','Kahvit / ruoka huomioitu','Sää seuraavalle päivälle katsottu','Seuraava pysähdyspaikka mietitty']}
+];
+function renderChecklists(){
+  setActive(null);
+  const data=getChecklist();
+  const done=checklistSections.flatMap(s=>s.items).filter(item=>data[item]).length;
+  const total=checklistSections.flatMap(s=>s.items).length;
+  view.innerHTML=`<button class="back" onclick="go('home')">‹ Koti</button><section class="page-head"><small>Karavaanarin kaveri</small><h1>✅ Lähtölista</h1><p>Ei kilometrejä. Vain ne asiat, jotka oikeasti helpottavat reissua.</p><div class="progress"><span style="width:${percent(done,total)}%"></span></div></section><div class="stats-card"><div><strong>${done}</strong><span>Tehty</span></div><div><strong>${total}</strong><span>Yhteensä</span></div><div><strong>${percent(done,total)}%</strong><span>Valmis</span></div></div>${checklistSections.map(sec=>`<section class="check-card"><h2>${sec.title}</h2>${sec.items.map(item=>`<label class="check-row"><input type="checkbox" ${data[item]?'checked':''} onchange="toggleChecklist('${escapeHtml(item)}',this.checked)"><span>${item}</span></label>`).join('')}</section>`).join('')}<button class="secondary-add" onclick="resetChecklist()">Tyhjennä lista uutta lähtöä varten</button>`;
+}
+function toggleChecklist(item,checked){ const data=getChecklist(); data[item]=checked; setChecklist(data); }
+function resetChecklist(){ if(!confirm('Tyhjennetäänkö lähtölista?')) return; setChecklist({}); renderChecklists(); }
+
+function renderDayPlan(){
+  setActive('trips');
+  const plans=getDayPlans();
+  view.innerHTML=`<button class="back" onclick="go('home')">‹ Koti</button><section class="page-head"><small>Reissupäivä</small><h1>🗓️ Päivän suunnitelma</h1><p>Suunnittele päivän pysähdykset ilman turhaa säätöä.</p></section><label class="field"><span>📅 Päivä</span><input id="planDate" type="date"></label><label class="field"><span>📍 Mihin tänään?</span><input id="planRoute" placeholder="Esim. Vääksy • Pulkkilanharju • kahvila"></label><label class="field"><span>☕ Tärkeä pysähdys</span><input id="planStop" placeholder="Kahvila, uimapaikka, kauppa, nähtävyys"></label><label class="field"><span>📝 Päivän muistettava asia</span><textarea id="planNote" rows="4" placeholder="Mitä haluan muistaa tänään?"></textarea></label><button class="save-wide" onclick="saveDayPlan()">💾 Tallenna päivän suunnitelma</button><section class="section-head"><h2>Aiemmat suunnitelmat</h2></section><div class="mini-list">${plans.map((p,i)=>`<div><span>${escapeHtml(p.route)}</span><small>${escapeHtml(p.date)} • ${escapeHtml(p.stop||'')}</small><button onclick="deleteDayPlan(${i})">Poista</button></div>`).join('')||'<p>Ei suunnitelmia vielä.</p>'}</div>`;
+}
+function saveDayPlan(){ const plans=getDayPlans(); plans.unshift({date:document.getElementById('planDate').value||new Date().toLocaleDateString('fi-FI'),route:document.getElementById('planRoute').value||'Oma reissupäivä',stop:document.getElementById('planStop').value,note:document.getElementById('planNote').value}); setDayPlans(plans); renderDayPlan(); }
+function deleteDayPlan(i){ const plans=getDayPlans(); plans.splice(i,1); setDayPlans(plans); renderDayPlan(); }
+
+function renderServices(){
+  setActive(null);
+  const notes=getServiceNotes();
+  view.innerHTML=`<button class="back" onclick="go('home')">‹ Koti</button><section class="page-head"><small>Karavaanarin kaveri</small><h1>💧 Huoltopisteet</h1><p>Omat muistiinpanot vedestä, tyhjennyksestä, sähköstä ja suihkuista.</p></section><div class="service-quick"><button>💧 Vesi</button><button>🚽 WC</button><button>⚡ Sähkö</button><button>🚿 Suihku</button><button>🗑️ Tyhjennys</button><button>🐕 Koiralle hyvä</button></div><label class="field"><span>📍 Paikka</span><input id="servicePlace" placeholder="Esim. leirintäalue, matkaparkki, kunta"></label><label class="field"><span>✅ Mitä löytyi?</span><input id="serviceTags" placeholder="Vesi, WC, sähkö, suihku..."></label><label class="field"><span>📝 Huomio</span><textarea id="serviceNote" rows="4" placeholder="Oliko helppo käyttää? Oliko maksullinen? Aukiolo?"></textarea></label><button class="save-wide" onclick="saveServiceNote()">💾 Tallenna huoltopiste</button><section class="section-head"><h2>Omat huoltopisteet</h2></section><div class="log-list">${notes.map((n,i)=>`<article class="log-card"><div class="log-top"><strong>${escapeHtml(n.place)}</strong><small>${escapeHtml(n.date)}</small></div><div class="service-tags">${String(n.tags||'').split(',').filter(Boolean).map(t=>`<span>${escapeHtml(t.trim())}</span>`).join('')}</div><p>${escapeHtml(n.note||'')}</p><button onclick="deleteServiceNote(${i})">Poista</button></article>`).join('')||'<p>Ei huoltopisteitä vielä.</p>'}</div>`;
+}
+function saveServiceNote(){ const notes=getServiceNotes(); notes.unshift({date:new Date().toLocaleDateString('fi-FI'),place:document.getElementById('servicePlace').value||'Huoltopiste',tags:document.getElementById('serviceTags').value,note:document.getElementById('serviceNote').value}); setServiceNotes(notes); renderServices(); }
+function deleteServiceNote(i){ const notes=getServiceNotes(); notes.splice(i,1); setServiceNotes(notes); renderServices(); }
+
+function renderAchievements(){
+  setActive('profile');
+  const s=totalStats(); const logs=getLogbook().length; const favs=allMunicipalities.filter(m=>getMunicipalityDetail(m.code).favourite).length; const overnight=Object.values(getMunicipalityDetails()).filter(x=>x.overnight).length;
+  const items=[['🥉','Ensimmäinen kunta',s.visited>=1],['🥈','10 kuntaa',s.visited>=10],['🥇','50 kuntaa',s.visited>=50],['🇫🇮','100 kuntaa',s.visited>=100],['🏆','Kaikki kunnat',s.visited>=s.total],['📒','Ensimmäinen lokimerkintä',logs>=1],['🚐','5 yöpaikkaa',overnight>=5],['❤️','5 suosikkia',favs>=5]];
+  view.innerHTML=`<button class="back" onclick="go('home')">‹ Koti</button><section class="page-head"><small>Motivaatio</small><h1>🏆 Saavutukset</h1><p>Pieniä palkintoja siitä, että Suomi tulee tutuksi pala kerrallaan.</p></section><div class="achievement-grid">${items.map(([icon,title,ok])=>`<article class="achievement ${ok?'done':''}"><span>${icon}</span><strong>${title}</strong><small>${ok?'Avattu':'Vielä edessä'}</small></article>`).join('')}</div>`;
+}
+
+function renderBackupPage(){
+  setActive('profile');
+  const data={visited:getVisited(),details:getMunicipalityDetails(),trips:getTrips(),logbook:getLogbook(),checklist:getChecklist(),dayPlans:getDayPlans(),serviceNotes:getServiceNotes()};
+  view.innerHTML=`<button class="back" onclick="go('profile')">‹ Minä</button><section class="page-head"><h1>☁️ Varmuuskopio</h1><p>Kopioi tiedot talteen tai palauta aiempi varmuuskopio.</p></section><label class="field"><span>Varmuuskopio</span><textarea id="backupText" rows="8">${escapeHtml(JSON.stringify(data))}</textarea></label><button class="save-wide" onclick="copyBackup()">Kopioi varmuuskopio</button><label class="field"><span>Palauta tähän</span><textarea id="restoreText" rows="6" placeholder="Liitä varmuuskopio tähän"></textarea></label><button class="secondary-add" onclick="restoreBackup()">Palauta tiedot</button>`;
+}
+function copyBackup(){ const el=document.getElementById('backupText'); el.select(); document.execCommand('copy'); alert('Kopioitu'); }
+function restoreBackup(){ try{ const d=JSON.parse(document.getElementById('restoreText').value); if(d.visited)setVisited(d.visited); if(d.details)setMunicipalityDetails(d.details); if(d.trips)setTrips(d.trips); if(d.logbook)setLogbook(d.logbook); if(d.checklist)setChecklist(d.checklist); if(d.dayPlans)setDayPlans(d.dayPlans); if(d.serviceNotes)setServiceNotes(d.serviceNotes); alert('Palautettu'); go('profile'); } catch(e){ alert('Varmuuskopio ei ollut oikeassa muodossa.'); } }
 
 function showBackup(){
   const data={visited:getVisited(),details:getMunicipalityDetails(),trips:getTrips(),logbook:getLogbook()};

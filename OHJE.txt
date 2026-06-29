@@ -1,12 +1,12 @@
-Matkalla Suomessa v17 – Karavaanarin kumppani
+Matkalla Suomessa v18 – Karavaanarin superkumppani
 
-Sisältää:
-- Premium-kartta
-- Kunnan oma sivu laajennettuna
-- Käyntipäivä, arvosana, suosikki, yövyin täällä
-- Kuvat-laskuri
-- Omat vinkit: matkaparkit, leirintäalueet, kahvilat/ravintolat, nähtävyydet
-- Karavaanarin lokikirja ilman kilometrejä
-- Varmuuskopio-näkymä
+Uutta:
+- Lähtölista karavaanarille
+- Päivän suunnitelma
+- Huoltopisteiden omat muistiinpanot
+- Saavutukset
+- Laajempi varmuuskopio ja palautus
+- Ei kilometrejä
 
-Pura ZIP, vie kaikki tiedostot GitHubiin ja paina Commit changes.
+Käyttö:
+Vie kaikki tiedostot GitHubiin ja paina Commit changes.
