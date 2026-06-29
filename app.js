@@ -8,25 +8,25 @@ const regionSlugs = Object.fromEntries(Object.keys(REGIONS).map(name => [slugify
 const allMunicipalities = Object.entries(REGIONS).flatMap(([region, list]) => list.map(item => ({...item, region})));
 
 const regionMeta = {
-  "Lappi": {abbr:"L", emoji:"❄️", x:54, y:13},
-  "Pohjois-Pohjanmaa": {abbr:"PP", emoji:"🌲", x:49, y:31},
-  "Kainuu": {abbr:"K", emoji:"🫐", x:64, y:36},
-  "Keski-Pohjanmaa": {abbr:"KP", emoji:"🌾", x:35, y:44},
-  "Pohjanmaa": {abbr:"P", emoji:"🌊", x:29, y:52},
-  "Etelä-Pohjanmaa": {abbr:"EP", emoji:"🌾", x:39, y:57},
-  "Keski-Suomi": {abbr:"KS", emoji:"🌿", x:51, y:58},
-  "Pohjois-Savo": {abbr:"PS", emoji:"🌲", x:61, y:55},
-  "Pohjois-Karjala": {abbr:"PK", emoji:"🦌", x:72, y:55},
-  "Etelä-Savo": {abbr:"ES", emoji:"🌊", x:62, y:67},
-  "Etelä-Karjala": {abbr:"EK", emoji:"🏰", x:72, y:78},
-  "Kymenlaakso": {abbr:"K", emoji:"⚓", x:65, y:85},
-  "Päijät-Häme": {abbr:"PH", emoji:"📍", x:52, y:78},
-  "Kanta-Häme": {abbr:"KH", emoji:"🌳", x:45, y:82},
-  "Pirkanmaa": {abbr:"PI", emoji:"🏙️", x:42, y:72},
-  "Satakunta": {abbr:"S", emoji:"🌅", x:31, y:76},
-  "Varsinais-Suomi": {abbr:"VS", emoji:"⚓", x:35, y:90},
-  "Uusimaa": {abbr:"U", emoji:"🏙️", x:53, y:91},
-  "Ahvenanmaa": {abbr:"Å", emoji:"⛵", x:18, y:95}
+  "Lappi": {abbr:"L", emoji:"❄️", x:55, y:13},
+  "Pohjois-Pohjanmaa": {abbr:"PP", emoji:"🌲", x:46, y:38},
+  "Kainuu": {abbr:"K", emoji:"🫐", x:66, y:43},
+  "Keski-Pohjanmaa": {abbr:"KP", emoji:"🌾", x:32, y:53},
+  "Pohjanmaa": {abbr:"P", emoji:"🌊", x:26, y:62},
+  "Etelä-Pohjanmaa": {abbr:"EP", emoji:"🌾", x:37, y:66},
+  "Keski-Suomi": {abbr:"KS", emoji:"🌿", x:52, y:67},
+  "Pohjois-Savo": {abbr:"PS", emoji:"🌲", x:64, y:62},
+  "Pohjois-Karjala": {abbr:"PK", emoji:"🦌", x:76, y:62},
+  "Etelä-Savo": {abbr:"ES", emoji:"🌊", x:65, y:75},
+  "Etelä-Karjala": {abbr:"EK", emoji:"🏰", x:76, y:83},
+  "Kymenlaakso": {abbr:"KY", emoji:"⚓", x:66, y:88},
+  "Päijät-Häme": {abbr:"PH", emoji:"📍", x:54, y:83},
+  "Kanta-Häme": {abbr:"KH", emoji:"🌳", x:46, y:86},
+  "Pirkanmaa": {abbr:"PI", emoji:"🏙️", x:43, y:78},
+  "Satakunta": {abbr:"S", emoji:"🌅", x:30, y:82},
+  "Varsinais-Suomi": {abbr:"VS", emoji:"⚓", x:39, y:92},
+  "Uusimaa": {abbr:"U", emoji:"🏙️", x:55, y:93},
+  "Ahvenanmaa": {abbr:"Å", emoji:"⛵", x:18, y:91}
 };
 
 const sampleTrips = [
@@ -75,10 +75,33 @@ function renderHome(){
     <article class="logbook-teaser" onclick="go('logbook')"><span>📒</span><div><strong>Lokikirja</strong><p>Yöpaikat, palvelut, tunnelmat ja aamun muistiinpanot. Ei kilometrejä.</p></div><em>›</em></article>`;
 }
 
-function miniFinlandMap(){ return `<svg class="mini-map" viewBox="0 0 220 420" aria-hidden="true"><path d="M120 8 C88 20 76 56 82 88 C89 122 60 126 51 158 C41 194 66 206 50 243 C36 275 62 292 48 323 C38 348 55 378 86 397 C121 419 160 404 168 366 C175 332 154 312 170 281 C188 247 160 226 175 190 C191 151 154 139 161 104 C168 65 151 18 120 8 Z" /></svg>`; }
+function miniFinlandMap(){ return `<svg class="mini-map" viewBox="0 0 300 560" aria-hidden="true"><path d="M154 13 C129 18 110 39 105 68 C101 94 118 116 108 138 C99 157 78 159 71 181 C62 212 84 229 75 258 C67 284 45 302 51 331 C56 354 75 370 70 397 C63 435 88 456 118 474 C143 489 164 513 191 500 C215 488 213 456 201 432 C190 410 201 391 222 375 C250 354 256 320 236 294 C222 275 230 254 246 232 C265 205 250 177 225 164 C204 153 202 132 216 109 C233 79 220 44 196 27 C183 18 170 10 154 13 Z"/><path d="M86 471 C61 472 45 489 42 515 C54 507 71 508 83 521 C95 505 94 487 86 471 Z"/></svg>`; }
 function renderFinlandMap(){
-  const labels = Object.keys(regionMeta).map(region=>{const m=regionMeta[region], st=regionStats(region), cls=regionClass(region); return `<button class="map-pin ${cls}" style="left:${m.x}%;top:${m.y}%" onclick="go('region/${slugify(region)}')" title="${region}"><b>${m.abbr}</b><small>${st.pct}%</small></button>`}).join('');
-  return `<section class="finland-card"><div class="finland-stage"><svg class="finland-outline" viewBox="0 0 260 500" role="img" aria-label="Suomen kartta"><defs><linearGradient id="land" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#dff5ea"/><stop offset="1" stop-color="#edf8f1"/></linearGradient></defs><path class="land" d="M143 10 C111 18 91 47 97 88 C103 129 69 134 58 172 C48 207 78 219 59 259 C42 294 72 309 55 348 C40 383 62 422 96 446 C135 474 181 455 189 409 C196 370 173 351 191 315 C212 273 177 253 195 211 C218 158 172 152 180 108 C187 66 176 20 143 10 Z"/><path class="lake" d="M126 177 C111 194 105 214 119 232 C134 251 158 238 157 215 C157 195 143 182 126 177 Z"/><path class="lake" d="M141 251 C126 267 127 289 144 300 C162 310 178 295 172 276 C168 260 155 251 141 251 Z"/><path class="shore" d="M74 438 C55 428 41 409 36 387"/><path class="shore" d="M51 347 C31 347 22 369 34 386"/></svg>${labels}</div><div class="legend"><span><i></i>Aloittamatta</span><span><i class="started"></i>Aloitettu</span><span><i class="complete"></i>Valmis</span></div></section>`;
+  const labels = Object.keys(regionMeta).map(region=>{
+    const m=regionMeta[region], st=regionStats(region), cls=regionClass(region);
+    return `<button class="map-pin ${cls}" style="left:${m.x}%;top:${m.y}%" onclick="go('region/${slugify(region)}')" title="${region}"><b>${m.abbr}</b><small>${st.pct}%</small></button>`
+  }).join('');
+  return `<section class="finland-card real-map-card">
+    <div class="map-title-row"><div><strong>🇫🇮 Suomen kartta</strong><span>Valitse maakunta kartalta</span></div></div>
+    <div class="finland-stage real-finland-stage">
+      <svg class="finland-outline real-finland" viewBox="0 0 300 560" role="img" aria-label="Suomen kartta">
+        <defs>
+          <linearGradient id="landV19" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#d7f5e8"/><stop offset="1" stop-color="#f4fbf6"/></linearGradient>
+          <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="12" flood-color="#0f3d35" flood-opacity="0.20"/></filter>
+        </defs>
+        <path class="land-main" d="M154 13 C129 18 110 39 105 68 C101 94 118 116 108 138 C99 157 78 159 71 181 C62 212 84 229 75 258 C67 284 45 302 51 331 C56 354 75 370 70 397 C63 435 88 456 118 474 C143 489 164 513 191 500 C215 488 213 456 201 432 C190 410 201 391 222 375 C250 354 256 320 236 294 C222 275 230 254 246 232 C265 205 250 177 225 164 C204 153 202 132 216 109 C233 79 220 44 196 27 C183 18 170 10 154 13 Z"/>
+        <path class="aland" d="M86 471 C61 472 45 489 42 515 C54 507 71 508 83 521 C95 505 94 487 86 471 Z"/>
+        <path class="lake big" d="M153 214 C132 226 126 253 143 272 C160 291 187 278 185 249 C184 227 170 216 153 214 Z"/>
+        <path class="lake" d="M165 310 C148 326 149 350 168 359 C187 367 204 349 197 329 C191 313 179 306 165 310 Z"/>
+        <path class="lake small" d="M120 337 C105 348 104 366 117 374 C132 383 148 371 143 354 C139 341 131 335 120 337 Z"/>
+        <path class="coast" d="M73 400 C49 403 31 430 36 458 C39 477 53 492 70 501"/>
+        <path class="coast" d="M58 331 C31 334 18 363 31 389"/>
+        <path class="coast east" d="M230 287 C251 308 247 342 222 365"/>
+      </svg>
+      ${labels}
+    </div>
+    <div class="legend"><span><i></i>Aloittamatta</span><span><i class="started"></i>Aloitettu</span><span><i class="complete"></i>Valmis</span></div>
+  </section>`;
 }
 
 function renderMap(){
