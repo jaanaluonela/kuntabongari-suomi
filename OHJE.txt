@@ -1,8 +1,12 @@
-Matkalla Suomessa v15 Premium-kartta
+Matkalla Suomessa v17 – Karavaanarin kumppani
 
-1. Pura ZIP.
-2. Avaa purettu kansio.
-3. GitHubissa: Add file -> Upload files.
-4. Valitse kaikki tämän kansion tiedostot.
-5. Commit changes.
-6. Netlify julkaisee automaattisesti.
+Sisältää:
+- Premium-kartta
+- Kunnan oma sivu laajennettuna
+- Käyntipäivä, arvosana, suosikki, yövyin täällä
+- Kuvat-laskuri
+- Omat vinkit: matkaparkit, leirintäalueet, kahvilat/ravintolat, nähtävyydet
+- Karavaanarin lokikirja ilman kilometrejä
+- Varmuuskopio-näkymä
+
+Pura ZIP, vie kaikki tiedostot GitHubiin ja paina Commit changes.
