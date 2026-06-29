@@ -1,8 +1,8 @@
-/* Matkalla Suomessa v31 – Premium-harppaus
+/* Matkalla Suomessa v32 – Oikeampi Suomen kartta
    Suuri etusivu, oma matkakirja, haluan käydä, suosikit, päiväkirja ja parempi karttanäkymä. */
 const DATA = typeof REGIONS !== 'undefined' ? REGIONS : {};
-const STORE_KEY = 'matkalla-suomessa-v31';
-const OLD_KEYS = ['matkalla-suomessa-v30','matkalla-suomessa-v21','matkalla-suomessa-v20'];
+const STORE_KEY = 'matkalla-suomessa-v32';
+const OLD_KEYS = ['matkalla-suomessa-v31','matkalla-suomessa-v30','matkalla-suomessa-v21','matkalla-suomessa-v20'];
 const view = document.getElementById('view');
 let route = location.hash.replace('#','') || 'home';
 let state = loadState();
@@ -119,12 +119,33 @@ function demoTrips(){ return ['Päijät-Häme','Kesäretki Kouvolaan','Himos –
 
 function renderMap(){
   const t=total(), v=visited(), p=t?Math.round(v/t*100):0;
-  view.innerHTML = `<section class="page map-page"><div class="page-head"><div><h1>Suomen kartta</h1><p>Valitse maakunta ja jatka omaa matkakirjaasi.</p></div><button class="round green" onclick="showSearch()">🔍</button></div>
-  <div class="map-card premium-map"><div class="map-top"><b>${v}/${t} kuntaa</b><b>${p}% Suomi valmis</b></div><div class="finland-map">${finlandSvg()}${regions().map(pin).join('')}</div><div class="legend"><span><i></i>Aloittamatta</span><span><i class="start"></i>Aloitettu</span><span><i class="done"></i>Valmis</span></div></div>
-  ${section('Jatka maakunnasta', state.lastRegion+' ›', `goRegion('${state.lastRegion}')`)}<div class="region-list">${regions().map(regionRow).join('')}</div></section>`;
+  view.innerHTML = `<section class="page map-page v32">
+    <div class="page-head"><div><h1>🇫🇮 Suomen kartta</h1><p class="lead">Valitse maakunta kartalta tai listasta. V32 tuo karttaan selkeämmän Suomen muodon, Ahvenanmaan ja maakuntien omat pisteet.</p></div><button class="round green" onclick="showSearch()">🔍</button></div>
+    <div class="map-summary"><div><b>${v}</b><small>Käytyä kuntaa</small></div><div><b>${t}</b><small>Kuntaa yhteensä</small></div><div><b>${p}%</b><small>Suomi valmis</small></div></div>
+    <div class="true-map-card">
+      <div class="map-badge"><b>Oma Suomen kartta</b><small>Maakunnat oikeilla alueilla</small></div>
+      <div class="finland-map true-finland">${finlandSvg()}${regions().map(pin).join('')}</div>
+      <div class="legend"><span><i></i>Aloittamatta</span><span><i class="start"></i>Aloitettu</span><span><i class="done"></i>Valmis</span></div>
+    </div>
+    ${section('Jatka maakunnasta', state.lastRegion+' ›', `goRegion('${state.lastRegion}')`)}
+    <div class="region-list premium-list">${regions().map(regionRow).join('')}</div>
+  </section>`;
 }
-function pin(r){ const s=stats(r), m=meta(r), cls=s.pct===100?'done':s.pct>0?'start':''; return `<button class="pin ${cls}" style="left:${m.pos[0]}%;top:${m.pos[1]}%" onclick="goRegion('${esc(r)}')"><b>${m.abbr}</b><small>${s.pct}%</small></button>`; }
-function finlandSvg(){ return `<svg viewBox="0 0 250 560" aria-label="Suomen kartta"><path class="land" d="M129 12 C160 22 171 52 168 87 C166 119 184 149 172 184 C164 208 180 231 174 264 C168 296 186 322 174 354 C166 376 171 407 154 435 C137 464 139 501 111 526 C89 546 51 538 42 508 C35 483 47 459 37 432 C26 403 35 381 28 354 C20 324 30 303 24 275 C18 248 37 231 35 206 C33 177 57 164 58 139 C59 108 82 101 79 72 C76 42 98 18 129 12 Z"/><path class="lake" d="M122 206 C148 226 145 271 119 289 C95 268 98 229 122 206 Z"/><path class="lake" d="M138 328 C153 344 149 376 128 389 C109 371 114 340 138 328 Z"/><circle class="aland" cx="46" cy="514" r="15"/><circle class="aland" cx="21" cy="493" r="8"/></svg>`; }
+function pin(r){ const s=stats(r), m=meta(r), cls=s.pct===100?'done':s.pct>0?'start':''; return `<button class="pin ${cls}" style="left:${m.pos[0]}%;top:${m.pos[1]}%" onclick="goRegion('${esc(r)}')" title="${esc(r)}"><b>${m.abbr}</b><small>${s.pct}%</small></button>`; }
+function finlandSvg(){ return `<svg viewBox="0 0 320 650" aria-label="Suomen kartta" class="finland-svg-v32">
+  <defs>
+    <linearGradient id="landGrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#e6f7ed"/><stop offset="1" stop-color="#c9ead8"/></linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="15" flood-color="#064e3b" flood-opacity="0.18"/></filter>
+  </defs>
+  <path class="land main-land" filter="url(#softShadow)" d="M170 12C202 22 221 54 216 91C211 126 228 157 218 193C210 222 230 249 221 285C212 323 229 351 218 390C210 421 218 453 199 488C183 517 174 552 146 581C119 609 83 610 66 581C50 554 62 524 52 495C41 465 51 436 43 405C35 374 45 349 37 319C29 289 45 267 45 241C45 211 69 197 70 168C71 137 95 128 93 98C91 65 112 31 141 17C150 13 160 10 170 12Z"/>
+  <path class="shore-detail" d="M70 494C45 486 37 505 38 526C39 547 55 558 65 580"/>
+  <path class="lake big" d="M154 219C187 244 184 300 151 323C120 298 123 244 154 219Z"/>
+  <path class="lake" d="M171 356C195 381 189 427 160 445C133 417 141 374 171 356Z"/>
+  <path class="lake small" d="M124 360C140 373 139 402 121 416C104 398 108 374 124 360Z"/>
+  <path class="lake small" d="M178 126C194 140 193 166 176 181C158 164 161 140 178 126Z"/>
+  <circle class="aland" cx="42" cy="588" r="18"/><circle class="aland small" cx="17" cy="565" r="9"/><circle class="aland small" cx="62" cy="615" r="7"/>
+  <path class="map-line" d="M92 113C133 132 184 116 213 91M45 244C102 265 167 259 221 285M43 405C95 427 159 424 218 390M66 581C103 550 160 546 199 488"/>
+</svg>`; }
 function regionRow(r){ const s=stats(r), m=meta(r); return `<button class="region-row" onclick="goRegion('${esc(r)}')"><span>${m.emoji}</span><div><b>${esc(r)}</b><small>${s.visited}/${s.total} · ${s.pct}%</small><div class="bar"><i style="width:${s.pct}%"></i></div></div><em>›</em></button>`; }
 
 function renderRegion(r){

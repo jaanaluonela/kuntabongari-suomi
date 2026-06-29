@@ -1,13 +1,4 @@
-Matkalla Suomessa v31 Premium-harppaus
+Matkalla Suomessa v32 – Oikeampi Suomen kartta
 
-Päivitä GitHubiin kaikki tämän kansion tiedostot:
-- index.html
-- kartta.html
-- paijat-hame.html
-- paivakirja.html
-- profiili.html
-- app.js
-- data.js
-- styles.css
-
-Tämän jälkeen paina GitHubissa Commit changes ja odota Netlifyn julkaisu.
+Päivitä GitHubiin kaikki tiedostot tästä kansiosta.
+Tässä versiossa karttanäkymä on vaihdettu selkeästi Suomen muotoisemmaksi: parempi siluetti, Ahvenanmaa, järvet, maakuntapisteet ja tilastokortit.
