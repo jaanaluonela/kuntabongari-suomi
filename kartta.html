@@ -9,16 +9,15 @@
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <button class="round-icon" onclick="go('home')">☰</button>
-      <div class="brand"><span class="logo">♡</span><span>Matkalla<br>Suomessa</span></div>
-      <button class="round-icon" onclick="showSearch()" title="Haku">🔍</button>
+      <div class="brand"><span class="logo">🚌</span><span>Matkalla<br>Suomessa</span></div>
+      <button class="icon" onclick="showSearch()" title="Haku">🔍</button>
     </header>
     <main id="view"></main>
     <nav class="bottomnav">
-      <button data-nav="home" onclick="go('home')">🏠<span>Etusivu</span></button>
+      <button data-nav="home" onclick="go('home')">🏠<span>Koti</span></button>
       <button data-nav="map" onclick="go('map')">🗺️<span>Kartta</span></button>
       <button class="plus" onclick="go('newTrip')">＋</button>
-      <button data-nav="trips" onclick="go('trips')">📖<span>Päiväkirja</span></button>
+      <button data-nav="trips" onclick="go('trips')">🧳<span>Matka</span></button>
       <button data-nav="profile" onclick="go('profile')">👤<span>Minä</span></button>
     </nav>
   </div>

@@ -1,12 +1,10 @@
-Matkalla Suomessa v17 – Karavaanarin kumppani
+Matkalla Suomessa v11 - kartta
 
-Sisältää:
-- Premium-kartta
-- Kunnan oma sivu laajennettuna
-- Käyntipäivä, arvosana, suosikki, yövyin täällä
-- Kuvat-laskuri
-- Omat vinkit: matkaparkit, leirintäalueet, kahvilat/ravintolat, nähtävyydet
-- Karavaanarin lokikirja ilman kilometrejä
-- Varmuuskopio-näkymä
+Uutta:
+- Parempi Suomen kartta -näkymä
+- Päijät-Häme nostettu ensimmäiseksi valmiiksi maakuntanäkymäksi
+- Maakunnan kuntalista
+- Kunnan oma sivu: käyty, päivä, muistiinpano ja suosikki
+- Tiedot tallentuvat selaimen localStorageen
 
-Pura ZIP, vie kaikki tiedostot GitHubiin ja paina Commit changes.
+GitHubiin: lataa tämän kansion SISÄLLÄ olevat tiedostot, ei zip-tiedostoa.
