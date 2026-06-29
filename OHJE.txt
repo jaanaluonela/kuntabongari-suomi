@@ -1,4 +1,5 @@
-Matkalla Suomessa v32 – Oikeampi Suomen kartta
+Matkalla Suomessa v30 Premium
 
-Päivitä GitHubiin kaikki tiedostot tästä kansiosta.
-Tässä versiossa karttanäkymä on vaihdettu selkeästi Suomen muotoisemmaksi: parempi siluetti, Ahvenanmaa, järvet, maakuntapisteet ja tilastokortit.
+Päivitä GitHubiin kaikki tämän kansion tiedostot.
+Jos GitHubissa on vanhoja tiedostoja, korvaa ne näillä.
+Netlify julkaisee automaattisesti commitin jälkeen.
