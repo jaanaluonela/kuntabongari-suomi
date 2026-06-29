@@ -1,10 +1,4 @@
-Matkalla Suomessa v11 - kartta
+Matkalla Suomessa v14 – Suomen kartta 2.0
 
-Uutta:
-- Parempi Suomen kartta -näkymä
-- Päijät-Häme nostettu ensimmäiseksi valmiiksi maakuntanäkymäksi
-- Maakunnan kuntalista
-- Kunnan oma sivu: käyty, päivä, muistiinpano ja suosikki
-- Tiedot tallentuvat selaimen localStorageen
-
-GitHubiin: lataa tämän kansion SISÄLLÄ olevat tiedostot, ei zip-tiedostoa.
+Päivitys: karttanäkymä on korvattu Suomen muotoisella SVG-kartalla, jossa maakuntapisteet ovat oikeilla suurpiirteisillä alueilla.
+Lataa kaikki tiedostot GitHubiin ja tee Commit changes. Netlify julkaisee automaattisesti.

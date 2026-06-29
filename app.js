@@ -56,6 +56,45 @@ function route(){ const hash = decodeURIComponent(location.hash.replace(/^#/,'')
 
 function totalStats(){ const visited=getVisited().length; const total=allMunicipalities.length; return {visited,total,pct:percent(visited,total)}; }
 function regionStats(region){ const visited=getVisited(); const total=REGIONS[region].length; const done=REGIONS[region].filter(m=>visited.includes(m.code)).length; return {done,total,pct:percent(done,total)}; }
+
+function regionBadge(region){
+  const parts = region.split(/[-\s]/).filter(Boolean);
+  if(region === 'Päijät-Häme') return 'PH';
+  if(region === 'Kanta-Häme') return 'KH';
+  if(region === 'Etelä-Karjala') return 'EK';
+  if(region === 'Etelä-Savo') return 'ES';
+  if(region === 'Pohjois-Savo') return 'PS';
+  if(region === 'Pohjois-Karjala') return 'PK';
+  if(region === 'Keski-Suomi') return 'KS';
+  if(region === 'Etelä-Pohjanmaa') return 'EP';
+  if(region === 'Keski-Pohjanmaa') return 'KP';
+  if(region === 'Pohjois-Pohjanmaa') return 'PP';
+  if(region === 'Varsinais-Suomi') return 'VS';
+  if(region === 'Ahvenanmaa') return 'Å';
+  return parts.map(p=>p[0]).join('').slice(0,2).toUpperCase();
+}
+
+function renderFinlandSvg(){
+  return `
+    <svg class="real-finland-svg" viewBox="0 0 300 620" role="img" aria-label="Suomen kartta">
+      <defs>
+        <linearGradient id="finlandFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#dff5ec"/>
+          <stop offset="100%" stop-color="#eefaf3"/>
+        </linearGradient>
+        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0b3d2e" flood-opacity="0.18"/>
+        </filter>
+      </defs>
+      <path class="finland-outline" filter="url(#softShadow)" d="M139 12 C165 19 183 37 185 65 C188 89 177 110 187 131 C197 152 218 163 215 190 C213 211 201 229 207 250 C214 272 236 286 232 314 C229 337 211 350 215 375 C220 404 245 421 239 450 C235 474 214 485 211 512 C208 541 187 572 155 594 C132 609 105 606 92 587 C80 570 83 548 72 532 C61 516 45 508 45 487 C45 468 61 454 57 436 C52 414 29 400 34 374 C38 352 58 342 57 321 C56 299 35 284 42 259 C48 237 70 230 73 208 C76 187 59 174 66 151 C73 128 96 124 101 103 C106 80 92 64 103 42 C111 27 124 16 139 12 Z"/>
+      <path class="lake-shape" d="M150 178 C165 194 164 219 148 234 C133 219 130 197 150 178 Z"/>
+      <path class="lake-shape" d="M154 278 C174 295 171 326 148 340 C128 324 130 295 154 278 Z"/>
+      <path class="lake-shape" d="M122 415 C139 427 139 451 122 462 C107 450 107 429 122 415 Z"/>
+      <circle class="aland-dot" cx="35" cy="548" r="18"/>
+      <circle class="aland-dot small" cx="61" cy="560" r="8"/>
+    </svg>`;
+}
+
 function toggleMunicipality(code){ const visited=getVisited(); const next=visited.includes(code)?visited.filter(x=>x!==code):[...visited,code]; setVisited(next); route(); }
 
 function renderHome(){
@@ -102,33 +141,31 @@ function openAddSheet(){ document.body.insertAdjacentHTML('beforeend', `<div cla
 function renderMap(){
   setActive('map');
   const stats=totalStats();
-  const bestRegions = Object.keys(REGIONS).map(region => ({region, ...regionStats(region)})).sort((a,b)=>b.pct-a.pct).slice(0,3);
+  const regionItems = Object.keys(REGIONS).map(region => ({region, ...regionStats(region)}));
+  const bestRegions = regionItems.sort((a,b)=>b.pct-a.pct).slice(0,3);
   view.innerHTML = `
-    <section class="page-head map-title v12-map-head">
-      <h1>🗺️ Suomen kartta</h1>
-      <p>Selkeämpi kartta, suuremmat maakuntakortit ja parempi etenemisen seuranta.</p>
+    <section class="page-head map-title v14-map-head">
+      <h1>🇫🇮 Suomen kartta</h1>
+      <p>Nyt kartta näyttää Suomelta. Napauta maakuntaa kartalta tai listasta.</p>
     </section>
 
-    <div class="map-progress-card">
+    <div class="map-progress-card v14-stats">
       <div><strong>${stats.visited}</strong><span>Käytyä kuntaa</span></div>
       <div><strong>${stats.total}</strong><span>Kuntaa yhteensä</span></div>
       <div><strong>${stats.pct}%</strong><span>Suomi valmis</span></div>
     </div>
 
-    <section class="finland-map-card" aria-label="Suomen maakuntakartta">
-      <div class="finland-silhouette">
-        <div class="finland-glow"></div>
+    <section class="real-map-card" aria-label="Suomen maakuntakartta">
+      <div class="real-map-wrap">
+        ${renderFinlandSvg()}
         ${Object.keys(REGIONS).map(region=>{
           const s=regionStats(region);
           const meta=REGION_META[region] || {x:50,y:50,emoji:'📍'};
           const cls=s.pct===100?'complete':s.done>0?'started':'';
-          return `<button class="map-pin ${cls}" style="left:${meta.x}%;top:${meta.y}%" onclick="go('region/${slugify(region)}')" title="${region}: ${s.done}/${s.total}"><span>${meta.emoji}</span><small>${s.pct}%</small></button>`;
+          return `<button class="region-dot ${cls}" style="left:${meta.x}%;top:${meta.y}%" onclick="go('region/${slugify(region)}')" aria-label="${region}: ${s.done}/${s.total} kuntaa"><span>${regionBadge(region)}</span><small>${s.pct}%</small></button>`;
         }).join('')}
       </div>
-      <div class="map-help">
-        <strong>Vihreä = aloitettu</strong>
-        <span>Kultainen = maakunta valmis</span>
-      </div>
+      <div class="map-legend"><span><i class="legend-open"></i> Aloittamatta</span><span><i class="legend-started"></i> Aloitettu</span><span><i class="legend-complete"></i> Valmis</span></div>
     </section>
 
     <section class="section-head"><h2>Jatka maakunnasta</h2><button onclick="go('region/paijat-hame')">Päijät-Häme ›</button></section>
@@ -137,7 +174,7 @@ function renderMap(){
     </div>
 
     <section class="section-head"><h2>Kaikki maakunnat</h2><button onclick="go('search')">Haku ›</button></section>
-    <div class="map-grid region-grid v12-region-grid">
+    <div class="map-grid region-grid v14-region-grid">
       ${Object.keys(REGIONS).map(region=>{
         const s=regionStats(region);
         const meta=REGION_META[region] || {emoji:'📍'};
