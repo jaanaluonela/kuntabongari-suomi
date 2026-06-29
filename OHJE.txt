@@ -1,10 +1,5 @@
-Matkalla Suomessa v11 - kartta
+Matkalla Suomessa v30 Premium
 
-Uutta:
-- Parempi Suomen kartta -näkymä
-- Päijät-Häme nostettu ensimmäiseksi valmiiksi maakuntanäkymäksi
-- Maakunnan kuntalista
-- Kunnan oma sivu: käyty, päivä, muistiinpano ja suosikki
-- Tiedot tallentuvat selaimen localStorageen
-
-GitHubiin: lataa tämän kansion SISÄLLÄ olevat tiedostot, ei zip-tiedostoa.
+Päivitä GitHubiin kaikki tämän kansion tiedostot.
+Jos GitHubissa on vanhoja tiedostoja, korvaa ne näillä.
+Netlify julkaisee automaattisesti commitin jälkeen.
