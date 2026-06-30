@@ -1,24 +1,20 @@
-V32 PUHDAS PERUSTA
+V33 Premium etusivu + kartta
 
-GitHubiin jätetään vain:
-index.html
-kartta.html
-paijat-hame.html
-paivakirja.html
-profiili.html
-data.js
-sovellus.js
-tyylit.css
-README.md / README.txt / OHJE.txt saa jäädä.
+Käytä vain näitä tiedostoja:
+- index.html
+- kartta.html
+- paijat-hame.html
+- paivakirja.html
+- profiili.html
+- data.js
+- sovellus.js
+- tyylit.css
 
-Poista tai älä käytä:
-app.js
-styles.css
-script.js
-tyyli.css
-tyylit.css.css
+Poista GitHubista vanhat ylimääräiset:
+- app.js
+- styles.css
+- script.js
+- tyyli.css
+- tyylit.css.css
 
-Kaikki HTML-sivut käyttävät:
-tyylit.css
-data.js
-sovellus.js
+Avaa ensin index.html selaimessa. Jos toimii, lataa GitHubiin ja tee Commit changes.
