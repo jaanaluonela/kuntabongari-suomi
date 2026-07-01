@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lahti</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+
+<header class="city-hero lahti-hero" style="background-image:linear-gradient(180deg,rgba(7,28,22,.08),rgba(7,28,22,.72)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=85')">
+  <div class="toprow"><button class="icon-btn" onclick="history.back()">‹</button><div></div><button class="icon-btn">♡</button></div>
+  <div class="city-title"><div class="city-crest">⚜</div><h1>Lahti</h1><p>Eläväinen kaupunki Vesijärven rannoilla Päijät-Hämeessä. 💙</p></div>
+</header>
+<main class="content">
+  <section class="city-note"><div class="round">🌿</div><p>Lahti on tunnettu Vesijärvestä, satamasta, Sibeliustalosta ja urheilukeskuksesta. Tutustu kohteisiin etukäteen ja tallenna jälkeenpäin, mikä jäi parhaiten mieleen.</p></section>
+  <section class="section">
+    <div class="city-actions">
+      <a class="pill-action" href="#muistot"><span>✅</span>Käyty</a>
+      <a class="pill-action" href="#"><span>📌</span>Haluan käydä</a>
+      <a class="pill-action" href="#"><span>♡</span>Suosikki</a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Palvelut Lahdessa</h2></div>
+    <div class="grid2">
+      <a class="tile" href="#nahtavyydet"><div class="emoji">📍</div><b>Nähtävyydet</b><small>Satama, Sibeliustalo, urheilu</small></a>
+      <a class="tile" href="#ravintolat"><div class="emoji">🍽️</div><b>Ravintolat</b><small>Ruokapaikat ja terassit</small></a>
+      <a class="tile" href="#kahvilat"><div class="emoji">☕</div><b>Kahvilat</b><small>Reissun tauot</small></a>
+      <a class="tile" href="#leirinta"><div class="emoji">🏕️</div><b>Leirintäalueet</b><small>Yöpyminen</small></a>
+      <a class="tile" href="#matkaparkit"><div class="emoji">🅿️</div><b>Matkaparkit</b><small>Pysähdy ja yövy</small></a>
+      <a class="tile" href="#huolto"><div class="emoji">💧</div><b>Huoltopisteet</b><small>Huolto matkalla</small></a>
+            <a class="tile" href="#kaupat"><div class="emoji">🛒</div><b>Kaupat</b><small>Ruoka ja tarvikkeet</small></a>
+      <a class="tile" href="#apteekki"><div class="emoji">💊</div><b>Apteekki</b><small>Tarvittaessa lähellä</small></a>
+      <a class="tile" href="#uimarannat"><div class="emoji">🏖️</div><b>Uimarannat</b><small>Kesäpäivään</small></a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Suosituimmat kohteet Lahdessa</h2><a class="more">Näytä kaikki ›</a></div>
+    <div class="h-scroll">
+      <div class="place-card" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80')"><span>♡</span><b>Lahden satama</b><small>★ 4,7 (128)</small></div>
+      <div class="place-card" style="background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=500&q=80')"><span>♡</span><b>Sibeliustalo</b><small>★ 4,8 (92)</small></div>
+      <div class="place-card" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=500&q=80')"><span>♡</span><b>Hyppyrimäet</b><small>★ 4,6 (77)</small></div>
+    </div>
+  </section>
+
+  <section class="section" id="nahtavyydet">
+    <div class="section-head"><h2>Nähtävyydet ja kohteet</h2></div>
+    <div class="detail-list">
+      <div class="detail-item"><div class="ico">🌊</div><div><b>Lahden satama</b><p>Helppo ensimmäinen kohde järvimaisemaan, kävelyyn, kahville ja ruokailuun.</p></div></div>
+      <div class="detail-item"><div class="ico">🎵</div><div><b>Sibeliustalo</b><p>Tunnettu puurakenteinen konserttitalo Vesijärven rannalla.</p></div></div>
+      <div class="detail-item"><div class="ico">⛷️</div><div><b>Urheilukeskus ja hyppyrimäet</b><p>Lahden tunnettu maamerkki ja hyvä paikka maisemien katseluun.</p></div></div>
+    </div>
+  </section>
+  <section class="section" id="muistot">
+    <div class="section-head"><h2>Oma kokemus Lahdesta</h2></div>
+    <div class="card memory-panel">
+      <div class="memory-summary"><b>⭐ Oma arvio</b><span>☆☆☆☆☆</span></div>
+      <div class="memory-fields">
+        <div><small>📅 Käyntipäivä</small><b>Lisää päivämäärä</b></div>
+        <div><small>🍽️ Missä söimme?</small><b>Lisää ravintola</b></div>
+        <div><small>☕ Paras kahvila</small><b>Lisää kahvila</b></div>
+        <div><small>❤️ Matkan kohokohta</small><b>Mikä jäi mieleen?</b></div>
+      </div>
+      <textarea placeholder="Kirjoita tähän myöhemmin mitä Lahdesta jäi mieleen..."></textarea>
+      <button class="save-memory">Tallenna muisto</button>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Sinun kuvasi Lahdesta</h2><a class="more">Näytä kaikki ›</a></div>
+    <div class="memory-row"><div class="memory" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=80')"><b>Auringonlasku</b></div><div class="memory" style="background-image:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80')"><b>Kahvi satamassa</b></div><a class="add-memory" href="uusi-matka.html">＋<br><span>Lisää muisto</span></a></div>
+  </section>
+</main>
+
+<nav class="bottomnav"><a href="index.html" class=""><span>🏠</span>Koti</a><a href="kartta.html" class="active"><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html" class=""><span>🧳</span>Matkat</a><a href="profiili.html" class=""><span>👤</span>Minä</a></nav>
+</div>
+<script src="data.js"></script>
+<script src="sovellus.js"></script>
+</body>
+</html>

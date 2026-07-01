@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uusi matka</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+<header class="page-top soft-top">
+  <button class="back" onclick="history.back()">‹</button>
+  <div><div class="logo-script page-logo">Uusi matka <span class="brand-heart">♡</span></div><p>Tallenna reissu ja lisää muistot.</p></div>
+  <button class="round-light">Tallenna</button>
+</header>
+<main class="content">
+  <section class="card new-cover">
+    <div class="photo" style="min-height:180px;display:grid;place-items:center;color:#fff;font-weight:900;background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.35)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80')">📷 Lisää kansikuva</div>
+  </section>
+  <section class="section form">
+    <div class="field"><label>Matkan nimi</label><input id="tripName" placeholder="Esim. Kesäloma 2026"></div>
+    <div class="grid2"><div class="field"><label>Alkaa</label><input type="date"></div><div class="field"><label>Päättyy</label><input type="date"></div></div>
+    <div class="grid2"><div class="field"><label>Matkan tyyppi</label><select><option>Asuntoautomatka</option><option>Päiväretki</option><option>Viikonloppu</option></select></div><div class="field"><label>Matkaseurue</label><select><option>2 aikuista</option><option>Perhe</option><option>Yksin</option></select></div></div>
+    <button class="primary" onclick="saveTrip()">Luo matka</button>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Lisää tietoja matkaasi</h2><a class="more">Näytä lisää⌄</a></div>
+    <div class="quick-grid quick-grid-trip">
+      <a class="quick" href="#"><span>📷</span><b>Kuvat</b></a>
+      <a class="quick" href="#"><span>🍽️</span><b>Ravintola</b></a>
+      <a class="quick" href="#"><span>☕</span><b>Kahvila</b></a>
+      <a class="quick" href="#"><span>🛏️</span><b>Yöpyminen</b></a>
+      <a class="quick" href="#"><span>🚐</span><b>Matkaparkki</b></a>
+      <a class="quick" href="#"><span>⛺</span><b>Leirintäalue</b></a>
+      <a class="quick" href="#"><span>📍</span><b>Nähtävyys</b></a>
+      <a class="quick" href="#"><span>👥</span><b>Matkaseurue</b></a>
+      <a class="quick" href="#"><span>🚗</span><b>Kulkutapa</b></a>
+      <a class="quick" href="#"><span>📝</span><b>Muistiinpanot</b></a>
+      <a class="quick" href="#"><span>⭐</span><b>Arvio</b></a>
+      <a class="quick" href="#"><span>❤️</span><b>Suosikiksi</b></a>
+    </div>
+  </section>
+</main>
+<nav class="bottomnav"><a href="index.html"><span>🏠</span>Koti</a><a href="kartta.html"><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html"><span>🧳</span>Matka</a><a href="profiili.html"><span>👤</span>Minä</a></nav>
+</div><script src="data.js"></script><script src="sovellus.js"></script>
+</body></html>

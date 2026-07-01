@@ -1,1 +1,135 @@
-<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kartta</title><link rel="stylesheet" href="tyylit.css"></head><body><div class="app page"><header class="page-head"><b>🚌 Matkalla Suomessa</b><button onclick="showSearch()">🔍</button></header><main class="content"><h1>Suomen kartta</h1><p class="lead">Kuntabongaus on täällä omalla sivullaan. Valitse maakunta ja jatka omaa matkakirjaasi.</p><section class="stats"><div><b>3</b><span>Käytyä</span></div><div><b>309</b><span>Kuntaa</span></div><div><b>19</b><span>Maakuntaa</span></div></section><section class="map-card"><div class="finland-shape"><span class="pin p1">L<br>0%</span><span class="pin p2">PP<br>0%</span><span class="pin p3">PH<br>8%</span><span class="pin p4">VS<br>4%</span><span class="pin p5">U<br>0%</span></div><div class="legend"><span>○ Aloittamatta</span><span>● Aloitettu</span><span>● Valmis</span></div></section><h2>Maakunnat</h2><div class="region-list"><button onclick="location.href='paijat-hame.html'">📍 Päijät-Häme <span>3/14</span></button><button>⚓ Varsinais-Suomi <span>1/27</span></button><button>🏙️ Uusimaa <span>2/26</span></button></div></main><nav class="bottomnav"><button onclick="go('home')">🏠<span>Etusivu</span></button><button class="active" onclick="go('map')">🗺️<span>Kartta</span></button><button class="center" onclick="go('newTrip')">＋</button><button onclick="go('diary')">📖<span>Päiväkirja</span></button><button onclick="go('profile')">👤<span>Minä</span></button></nav></div><script src="data.js"></script><script src="sovellus.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suomen kartta</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+<header class="hero small map-hero">
+  <div class="toprow">
+    <button class="icon-btn" onclick="history.back()">‹</button>
+    <div><div class="logo-script">Suomen kartta ♡</div><div class="logo-sub">Maakunnat ja kunnat</div></div>
+    <button class="icon-btn">🔍</button>
+  </div>
+  <div class="hero-title"><h1>Minun Suomeni</h1><p>Valitse maakunta. Käydyt alueet värittyvät vihreäksi.</p></div>
+</header>
+
+<main class="content">
+  <section class="kpi">
+    <div><b>5</b><span class="muted">käytyä kuntaa</span></div>
+    <div><b>19</b><span class="muted">maakuntaa</span></div>
+    <div><b>308</b><span class="muted">kuntaa</span></div>
+  </section>
+
+  <section class="section mapbox finland-card">
+    <div class="section-head"><h2>Suomi kartalla</h2><a class="more" href="paijat-hame.html">Päijät-Häme ›</a></div>
+    <p class="muted map-note top-note">Paina maakuntaa. Seuraavaksi avautuvat kunnat ja niiden omat sivut.</p>
+
+    <div class="finland-svg-wrap real-finland" aria-label="Suomen maakuntakartta">
+      <svg class="finland-svg real-map" viewBox="0 0 430 860" role="img" aria-labelledby="karttaTitle" preserveAspectRatio="xMidYMid meet">
+        <title id="karttaTitle">Suomen maakunnat oikeassa Suomen muodossa</title>
+        <defs>
+          <!-- Suomen siluetti piirretty karttamaiseksi: käsivarsi, Lappi, itäraja, Järvi-Suomi ja etelärannikko. -->
+          <path id="finlandOutline" d="
+            M185 18
+            C205 28 235 30 254 52
+            C282 84 286 128 276 164
+            C267 196 281 224 292 252
+            C303 281 302 310 286 336
+            C303 365 312 400 296 430
+            C323 468 315 507 292 538
+            C312 578 302 616 276 642
+            C295 684 279 718 238 734
+            C218 743 211 760 198 779
+            C180 806 143 809 121 789
+            C98 768 102 738 117 715
+            C92 699 74 677 72 648
+            C68 611 88 587 83 556
+            C78 525 54 505 60 470
+            C65 438 95 421 96 391
+            C98 360 73 338 80 304
+            C86 274 112 252 108 221
+            C104 188 76 168 84 134
+            C93 96 128 80 143 47
+            C151 29 166 13 185 18 Z" />
+          <clipPath id="finlandClip"><use href="#finlandOutline"/></clipPath>
+          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#163b2a" flood-opacity="0.14"/>
+          </filter>
+        </defs>
+
+        <g filter="url(#softShadow)">
+          <use href="#finlandOutline" class="finland-base"/>
+        </g>
+
+        <g clip-path="url(#finlandClip)" class="maakunnat">
+          <a href="#" aria-label="Lappi"><path class="province lapland" d="M145 32 C174 23 224 32 250 58 C278 86 280 132 268 166 C258 194 276 224 286 252 L238 276 L190 248 L148 269 L106 232 C105 202 78 178 86 138 C96 94 127 78 145 32 Z"/></a>
+          <a href="#" aria-label="Pohjois-Pohjanmaa"><path class="province" d="M106 232 L148 269 L190 248 L238 276 L282 258 C302 296 294 327 268 354 L219 360 L174 338 L126 352 L80 304 C86 274 112 252 106 232 Z"/></a>
+          <a href="#" aria-label="Kainuu"><path class="province" d="M238 276 L282 258 C302 296 294 327 268 354 C298 384 306 414 286 438 L238 424 L219 360 L268 354 Z"/></a>
+          <a href="#" aria-label="Keski-Pohjanmaa"><path class="province" d="M80 304 L126 352 L174 338 L184 382 L147 405 L103 388 C84 368 74 340 80 304 Z"/></a>
+          <a href="#" aria-label="Pohjanmaa"><path class="province" d="M103 388 L147 405 L158 458 L126 488 L70 466 C74 434 97 416 103 388 Z"/></a>
+          <a href="#" aria-label="Etelä-Pohjanmaa"><path class="province" d="M147 405 L184 382 L238 424 L232 486 L187 498 L158 458 Z"/></a>
+          <a href="#" aria-label="Keski-Suomi"><path class="province" d="M126 488 L158 458 L187 498 L232 486 L246 535 L204 566 L151 548 L104 522 Z"/></a>
+          <a href="#" aria-label="Pohjois-Savo"><path class="province" d="M238 424 L286 438 C318 476 306 512 278 544 L246 535 L232 486 Z"/></a>
+          <a href="#" aria-label="Pohjois-Karjala"><path class="province" d="M286 438 C318 476 306 512 278 544 C306 582 294 618 264 644 L230 626 L246 535 L278 544 Z"/></a>
+          <a href="#" aria-label="Etelä-Savo"><path class="province" d="M204 566 L246 535 L278 544 L230 626 L190 626 L151 548 Z"/></a>
+          <a href="#" aria-label="Etelä-Karjala"><path class="province" d="M190 626 L230 626 L264 644 C282 682 268 712 238 734 L194 700 Z"/></a>
+          <a href="#" aria-label="Pirkanmaa"><path class="province" d="M104 522 L151 548 L190 626 L146 632 L104 604 L83 556 Z"/></a>
+          <a href="paijat-hame.html" aria-label="Päijät-Häme"><path class="province visited" d="M151 548 L204 566 L190 626 L146 632 L128 594 Z"/></a>
+          <a href="#" aria-label="Kanta-Häme"><path class="province" d="M104 604 L146 632 L134 682 L96 675 L72 648 Z"/></a>
+          <a href="#" aria-label="Satakunta"><path class="province" d="M83 556 L104 604 L72 648 C66 610 86 586 83 556 Z"/></a>
+          <a href="#" aria-label="Varsinais-Suomi"><path class="province" d="M96 675 L134 682 L117 715 C92 699 76 678 72 648 Z"/></a>
+          <a href="#" aria-label="Uusimaa"><path class="province" d="M134 682 L190 626 L194 700 L158 728 L117 715 Z"/></a>
+          <a href="#" aria-label="Kymenlaakso"><path class="province" d="M190 626 L264 644 L194 700 Z"/></a>
+        </g>
+        <use href="#finlandOutline" class="finland-outline"/>
+
+        <g class="aland" aria-label="Ahvenanmaa">
+          <a href="#"><circle class="province" cx="56" cy="734" r="17"/><circle class="province" cx="82" cy="716" r="8"/><circle class="province" cx="43" cy="704" r="6"/></a>
+        </g>
+
+        <g class="map-labels real-labels">
+          <text x="190" y="132">Lappi</text>
+          <text x="157" y="306">Pohjois-</text><text x="157" y="322">Pohjanmaa</text>
+          <text x="251" y="354">Kainuu</text>
+          <text x="130" y="368">Keski-</text><text x="130" y="384">Pohjanmaa</text>
+          <text x="111" y="452">Pohjanmaa</text>
+          <text x="190" y="441">Etelä-</text><text x="190" y="457">Pohjanmaa</text>
+          <text x="180" y="526">Keski-</text><text x="180" y="542">Suomi</text>
+          <text x="268" y="486">Pohjois-</text><text x="268" y="502">Savo</text>
+          <text x="278" y="582">Pohjois-</text><text x="278" y="598">Karjala</text>
+          <text x="214" y="600">Etelä-Savo</text>
+          <text x="230" y="684">Etelä-</text><text x="230" y="700">Karjala</text>
+          <text x="130" y="586">Pirkanmaa</text>
+          <a href="paijat-hame.html"><text class="visited-label" x="166" y="592">Päijät-</text><text class="visited-label" x="166" y="608">Häme</text></a>
+          <text x="104" y="638">Kanta-</text><text x="104" y="654">Häme</text>
+          <text x="74" y="606">Satakunta</text>
+          <text x="96" y="700">Varsinais-</text><text x="96" y="716">Suomi</text>
+          <text x="158" y="674">Uusimaa</text>
+          <text x="224" y="658">Kymen-</text><text x="224" y="674">laakso</text>
+          <text x="62" y="770">Ahvenanmaa</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend"><span><i class="lg visited-box"></i> Käyty / aloitettu</span><span><i></i> Tutkimatta</span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Maakunnat</h2></div>
+    <div class="list compact-list region-list">
+      <a class="card row" href="paijat-hame.html"><div class="round done-dot">✓</div><div><b>Päijät-Häme</b><div class="muted">Asikkala, Lahti, Heinola, Hollola…</div></div><span class="row-chev">›</span></a>
+      <a class="card row" href="#"><div class="round">📍</div><div><b>Uusimaa</b><div class="muted">Helsinki, Porvoo, Raasepori…</div></div><span class="row-chev">›</span></a>
+      <a class="card row" href="#"><div class="round">📍</div><div><b>Kanta-Häme</b><div class="muted">Forssa, Hattula, Hämeenlinna…</div></div><span class="row-chev">›</span></a>
+      <a class="card row" href="#"><div class="round">📍</div><div><b>Lappi</b><div class="muted">Rovaniemi, Inari, Kittilä…</div></div><span class="row-chev">›</span></a>
+    </div>
+  </section>
+</main>
+<nav class="bottomnav"><a href="index.html"><span>🏠</span>Koti</a><a href="kartta.html" class="active"><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html"><span>🧳</span>Matkat</a><a href="profiili.html"><span>👤</span>Minä</a></nav>
+</div>
+<script src="data.js"></script>
+<script src="sovellus.js"></script>
+</body>
+</html>

@@ -1,20 +1,14 @@
-V33 Premium etusivu + kartta
+Matkaile Suomessa v30
 
-Käytä vain näitä tiedostoja:
-- index.html
-- kartta.html
-- paijat-hame.html
-- paivakirja.html
-- profiili.html
-- data.js
-- sovellus.js
-- tyylit.css
+Muutokset:
+- Etusivun rakenne pidetty alkuperäisen mallin mukaisena.
+- Etusivun teksti päivitetty sovelluksen tarkoitukseen.
+- Etusivun taustakuva vaihtuu automaattisesti eri suomalaismaisemien välillä.
+- Karavaanarin vinkit korjattu: Pysäköinti poistettu ja tilalla Matkaparkit.
+- Suomen kartta -sivua täydennetty maakuntarakenne huomioiden.
+- Päijät-Hämeen kuntalistasta poistettu turha “ei vielä käyty” -ajattelu; käydyt merkitään vain ikonilla.
+- Asikkalan kuntasivulle lisätty Oma kokemus -osio: arvio, käyntipäivä, ruokapaikka, kahvila ja kohokohta.
 
-Poista GitHubista vanhat ylimääräiset:
-- app.js
-- styles.css
-- script.js
-- tyyli.css
-- tyylit.css.css
-
-Avaa ensin index.html selaimessa. Jos toimii, lataa GitHubiin ja tee Commit changes.
+Julkaisu Netlifyyn:
+1. Pura zip tai vedä tämä zip Netlifyn Deploys-kohtaan.
+2. Tarkista etusivu, kartta.html ja asikkala.html.

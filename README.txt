@@ -1,5 +1,6 @@
-Suomen Matkakirja testiversio
+Matkaile Suomessa – v35 Suomen kartta
 
-Avaa kansio VS Codessa ja paina Go Live.
-Avaa index.html selaimessa.
-Käydyt kunnat ja muistiot tallentuvat selaimen localStorageen.
+Tässä versiossa kartta.html on päivitetty Suomen muotoiseksi SVG-kartaksi.
+Mukana on 19 maakuntaa, maakuntarajat, Ahvenanmaa ja klikattava Päijät-Häme.
+
+Etusivun rakennetta ei ole muutettu.

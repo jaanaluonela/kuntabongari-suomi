@@ -1,1 +1,64 @@
-<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Päijät-Häme</title><link rel="stylesheet" href="tyylit.css"></head><body><div class="app page"><header class="city-hero"><button onclick="history.back()">‹</button><button>♡</button><h1>Päijät-Häme</h1><p>Järvien, harjujen ja pikkukaupunkien maakunta.</p></header><main class="content"><section class="stats"><div><b>3</b><span>Käyty</span></div><div><b>14</b><span>Kuntaa</span></div><div><b>21%</b><span>Valmis</span></div></section><h2>Kunnat</h2><div class="region-list"><button>Asikkala <span>Käyty</span></button><button>Lahti <span>Käyty</span></button><button>Heinola <span>Ei päivää</span></button><button>Padasjoki <span>Ei päivää</span></button></div></main><nav class="bottomnav"><button onclick="go('home')">🏠<span>Etusivu</span></button><button class="active" onclick="go('map')">🗺️<span>Kartta</span></button><button class="center" onclick="go('newTrip')">＋</button><button onclick="go('diary')">📖<span>Päiväkirja</span></button><button onclick="go('profile')">👤<span>Minä</span></button></nav></div><script src="data.js"></script><script src="sovellus.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Päijät-Häme</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+
+<header class="hero small" style="background-image:linear-gradient(180deg,rgba(10,35,25,.15),rgba(10,35,25,.78)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80')">
+  <div class="toprow"><button class="icon-btn" onclick="history.back()">‹</button><div><div class="logo-script">Päijät-Häme ❤️</div><div class="logo-sub">Maakunta</div></div><button class="icon-btn">♡</button></div>
+  <div class="hero-title"><h1>Päijät-Häme</h1><p>Järviä, harjuja, kanavia ja kaupunkikohteita.</p></div>
+</header>
+
+<main class="content">
+  <section class="kpi"><div><b>5/10</b><span class="muted">kunnat</span></div><div><b>12</b><span class="muted">kohteet</span></div><div><b>63%</b><span class="muted">valmis</span></div></section>
+
+  <section class="section region-map-card">
+    <div class="section-head"><h2>Päijät-Hämeen kunnat</h2></div>
+    <p class="muted section-intro">Valitse kunta kartalta tai listasta. Käydyt kunnat näkyvät vihreinä.</p>
+    <div class="paijat-map" aria-label="Päijät-Hämeen kuntakartta">
+      <div class="paijat-shape"></div>
+      <a class="muni hartola" href="#">Hartola</a>
+      <a class="muni sysma" href="#">Sysmä</a>
+      <a class="muni padasjoki" href="#">Padasjoki</a>
+      <a class="muni heinola" href="#">Heinola</a>
+      <a class="muni asikkala done" href="asikkala.html">Asikkala</a>
+      <a class="muni hollola" href="#">Hollola</a>
+      <a class="muni lahti" href="lahti.html">Lahti</a>
+      <a class="muni karkola" href="#">Kärkölä</a>
+      <a class="muni orimattila" href="#">Orimattila</a>
+    </div>
+  </section>
+
+  <section class="section list compact-list">
+    <div class="section-head"><h2>Kunnat listana</h2></div>
+    <a class="card row" href="asikkala.html"><div class="round done-dot">✓</div><div><b>Asikkala</b><div class="muted">Vääksy · Pulkkilanharju · palvelut</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="lahti.html"><div class="round">📍</div><div><b>Lahti</b><div class="muted">Satama · Sibeliustalo · ravintolat</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Heinola</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Hollola</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Padasjoki</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Sysmä</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Orimattila</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Kärkölä</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+    <a class="card row" href="#"><div class="round">📍</div><div><b>Hartola</b><div class="muted">Avaa kunta</div></div><span class="row-chev">›</span></a>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Maakunnan muistot</h2></div>
+    <div class="card memory-panel">
+      <div class="memory-summary"><b>❤️ Mitä haluat muistaa?</b><span>★★★★☆</span></div>
+      <p class="muted">Tähän kerätään myöhemmin kaikki Päijät-Hämeen kuvat, ruokapaikat, kahvilat ja omat kohokohdat.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav"><a href="index.html"><span>🏠</span>Koti</a><a href="kartta.html" class="active"><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html"><span>🧳</span>Matkat</a><a href="profiili.html"><span>👤</span>Minä</a></nav>
+</div>
+<script src="data.js"></script>
+<script src="sovellus.js"></script>
+</body>
+</html>

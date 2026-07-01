@@ -1,1 +1,36 @@
-<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Minä</title><link rel="stylesheet" href="tyylit.css"></head><body><div class="app page"><header class="page-head"><b>👤 Minä</b><button>⚙️</button></header><main class="content"><h1>Oma matkakirja</h1><section class="stats"><div><b>3</b><span>Käyty</span></div><div><b>2</b><span>Matkaa</span></div><div><b>4</b><span>Suosikkia</span></div></section><h2>Kuntabongaus</h2><article class="continue-card compact"><div class="continue-body"><h3>Suomi valmiina 1%</h3><div class="bar"><span style="width:1%"></span></div><p>Kuntabongaus ja maakuntatilastot löytyvät jatkossa täältä.</p></div></article></main><nav class="bottomnav"><button onclick="go('home')">🏠<span>Etusivu</span></button><button onclick="go('map')">🗺️<span>Kartta</span></button><button class="center" onclick="go('newTrip')">＋</button><button onclick="go('diary')">📖<span>Päiväkirja</span></button><button class="active" onclick="go('profile')">👤<span>Minä</span></button></nav></div><script src="data.js"></script><script src="sovellus.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profiili</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+
+<header class="hero small">
+  <div class="toprow"><button class="icon-btn">☰</button><div><div class="logo-script">Minun Suomeni ❤️</div><div class="logo-sub">Profiili</div></div><button class="icon-btn">⚙️</button></div>
+</header>
+<main class="content">
+  <section class="kpi"><div><b>5</b><span class="muted">kunnat</span></div><div><b>2</b><span class="muted">matkat</span></div><div><b>92</b><span class="muted">kuvat</span></div></section>
+  <section class="section">
+    <div class="section-head"><h2>Kuntabongaus</h2></div>
+    <div class="card">
+      <b>Suomen valloitus</b>
+      <div class="progress"><i style="width:2%"></i></div>
+      <div class="muted">5 / 308 kuntaa · 1 / 19 maakuntaa</div>
+    </div>
+  </section>
+  <section class="section grid2">
+    <div class="tile"><div class="emoji">🏆</div><b>Saavutukset</b><small>Ensimmäinen maakunta</small></div>
+    <div class="tile"><div class="emoji">❤️</div><b>Suosikit</b><small>12 kohdetta</small></div>
+  </section>
+</main>
+
+<nav class="bottomnav"><a href="index.html" class=""><span>🏠</span>Koti</a><a href="kartta.html" class=""><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html" class=""><span>🧳</span>Matkat</a><a href="profiili.html" class="active"><span>👤</span>Minä</a></nav>
+</div>
+<script src="data.js"></script>
+<script src="sovellus.js"></script>
+</body>
+</html>

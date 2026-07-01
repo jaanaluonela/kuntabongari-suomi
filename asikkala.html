@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asikkala</title>
+  <link rel="stylesheet" href="tyylit.css">
+</head>
+<body>
+<div class="app">
+
+<header class="hero small asikkala-hero" style="background-image:linear-gradient(180deg,rgba(10,35,25,.22),rgba(10,35,25,.76)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80')">
+  <div class="toprow"><button class="icon-btn" onclick="history.back()">‹</button><button class="icon-btn">♡</button></div>
+  <div class="hero-title"><h1>Asikkala</h1><p>Päijät-Häme · järvet, harjut ja Vääksyn kanava</p></div>
+</header>
+<main class="content">
+  <section class="kpi"><div><b>✅</b><span class="muted">käyty</span></div><div><b>12</b><span class="muted">palvelua</span></div><div><b>4.7</b><span class="muted">arvio</span></div></section>
+  <section class="section">
+    <div class="city-actions">
+      <a class="pill-action" href="#kokemus"><span>✅</span>Käyty</a>
+      <a class="pill-action" href="#"><span>📌</span>Haluan käydä</a>
+      <a class="pill-action" href="#"><span>♡</span>Suosikki</a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Palvelut kunnassa</h2></div>
+    <div class="grid2">
+      <a class="tile" href="#nahtavyydet"><div class="emoji">📍</div><b>Nähtävyydet</b><small>Kanava, satama, luonto</small></a>
+      <a class="tile" href="#ravintolat"><div class="emoji">🍽️</div><b>Ravintolat</b><small>Ruokapaikat ja terassit</small></a>
+      <a class="tile" href="#kahvilat"><div class="emoji">☕</div><b>Kahvilat</b><small>Reissun tauot</small></a>
+      <a class="tile" href="#leirinta"><div class="emoji">🏕️</div><b>Leirintäalueet</b><small>Yöpyminen</small></a>
+      <a class="tile" href="#matkaparkit"><div class="emoji">🅿️</div><b>Matkaparkit</b><small>Pysähdy ja yövy</small></a>
+      <a class="tile" href="#huolto"><div class="emoji">💧</div><b>Huoltopisteet</b><small>Vesi ja tyhjennys</small></a>
+      <a class="tile" href="#kaupat"><div class="emoji">🛒</div><b>Kaupat</b><small>Ruoka ja tarvikkeet</small></a>
+      <a class="tile" href="#apteekki"><div class="emoji">💊</div><b>Apteekki</b><small>Tarvittaessa lähellä</small></a>
+      <a class="tile" href="#uimarannat"><div class="emoji">🏖️</div><b>Uimarannat</b><small>Kesäpäivään</small></a>
+    </div>
+  </section>
+  <section class="section" id="nahtavyydet">
+    <div class="section-head"><h2>Nähtävyydet ja kohteet</h2></div>
+    <div class="detail-list">
+      <div class="detail-item"><div class="ico">🚤</div><div><b>Vääksyn kanava</b><p>Asikkalan tunnetuimpia paikkoja, hyvä pysähdys kävelylle ja kahville.</p></div></div>
+      <div class="detail-item"><div class="ico">🌲</div><div><b>Pulkkilanharju</b><p>Kaunis järvi- ja harjumaisema matkalla Päijänteen yli.</p></div></div>
+      <div class="detail-item"><div class="ico">☕</div><div><b>Vääksyn keskusta</b><p>Kahviloita, pieniä liikkeitä ja kanavan ympäristöä.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="kokemus">
+    <div class="section-head"><h2>Oma kokemus</h2></div>
+    <div class="card memory-panel">
+      <div class="memory-summary"><b>⭐ Oma arvio</b><span>★★★★☆</span></div>
+      <div class="memory-fields">
+        <div><small>📅 Käyntipäivä</small><b>Lisää päivämäärä</b></div>
+        <div><small>🍽️ Missä söimme?</small><b>Lisää ravintola</b></div>
+        <div><small>☕ Paras kahvila</small><b>Lisää kahvila</b></div>
+        <div><small>❤️ Matkan kohokohta</small><b>Mikä jäi mieleen?</b></div>
+      </div>
+      <textarea placeholder="Kirjoita tähän mitä Asikkalasta jäi mieleen..."></textarea>
+      <button class="save-memory">Tallenna muisto</button>
+      <p class="muted">Tähän tallentuvat myöhemmin omat kuvat, arviot ja muistiinpanot tästä kunnasta.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav"><a href="index.html" class=""><span>🏠</span>Koti</a><a href="kartta.html" class="active"><span>🗺️</span>Kartta</a><a href="uusi-matka.html" class="plusnav">＋</a><a href="paivakirja.html" class=""><span>🧳</span>Matkat</a><a href="profiili.html" class=""><span>👤</span>Minä</a></nav>
+</div>
+<script src="data.js"></script>
+<script src="sovellus.js"></script>
+</body>
+</html>
